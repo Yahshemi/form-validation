@@ -1,8 +1,12 @@
-console.log('hello world');
+// Global Variables
+
+// Initial focus: Set name field as the initial focus on page load
+window.addEventListener("load", e => {
+    let userName = document.getElementById('name');
+    userName.focus();
+});
 
 
-
-// TODO: Set focus on first text field
 
 // TODO: Add a text field when "other" is selected in Job Role
 
