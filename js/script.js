@@ -27,19 +27,25 @@ title.addEventListener('click', e => {
 // Create logic so that the color dropdown and it's label aren't visible until a design is selected
 let design = document.getElementById('design');
 let color = document.getElementById('color');
-color.style.display = 'none';
-color.previousElementSibling.style.display = 'none';
-design.addEventListener('click', e => {
-    if (e.target.textContent === 'Select Theme') {
-        color.style.display = 'none';
-        color.previousElementSibling.style.display = 'none';
-    } else {
-        color.style.display = '';
+let themeSelection = design.value;
+color.previousElementSibling.style.display = 'none'; // By default don't display label for color
+color.style.display = 'none'; // By default don't display color drop down
+
+design.addEventListener("change", e=> { // Event listener to listen for change in drop down value and act accordingly
+    if (design.value === 'heart js'){
         color.previousElementSibling.style.display = '';
-
+        color.style.display = '';
+    } else if (design.value === 'js puns'){
+      color.previousElementSibling.style.display = '';
+      color.style.display = '';
+    } else {
+        console.log('Theme not selected');
+        color.previousElementSibling.style.display = 'none'; 
+        color.style.display = 'none'; 
+  
     }
-});
-
+    
+   }); 
 
 // TODO: Only certain color options should be available based on "design" selection
 
