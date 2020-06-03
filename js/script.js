@@ -31,12 +31,13 @@ color.previousElementSibling.style.display = 'none'; // By default don't display
 color.style.display = 'none'; // By default don't display color drop down
 color.options[0].hidden = true;
 
+
 design.addEventListener("change", e=> { // Listen for change in drop down value and act accordingly
     if (design.value === 'heart js'){
        color.previousElementSibling.style.display = '';
        color.style.display = '';
        color.value = 'none';
-       color.options.item(0).hidden = true;
+       color.options.item(0).hidden = true; // Replace with more DRY code
        color.options.item(1).hidden = true;
        color.options.item(2).hidden = true;
        color.item(3).hidden = false;
@@ -47,7 +48,7 @@ design.addEventListener("change", e=> { // Listen for change in drop down value 
         color.previousElementSibling.style.display = '';
         color.style.display = '';
         color.value = 'none';
-        color.item(3).hidden = true;
+        color.item(3).hidden = true; // Replace with more DRY code
         color.item(4).hidden = true;
         color.item(5).hidden = true;
         color.options.item(0).hidden = false;
@@ -65,7 +66,7 @@ let activities = fieldset.item(2);
 activities.addEventListener('change', e=> { // Listen for change to checkbox
     console.log('checked');
     console.log(e.target.dataset.dayAndTime); // Access dataset for day-and-time
-    
+
 });
 
 // TODO: Don't allow selection of events happening on the same day and time if one is already selected
