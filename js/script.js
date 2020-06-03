@@ -31,10 +31,11 @@ color.previousElementSibling.style.display = 'none'; // By default don't display
 color.style.display = 'none'; // By default don't display color drop down
 color.options[0].hidden = true;
 
-design.addEventListener("click", e=> { // Event listener to listen for change in drop down value and act accordingly
+design.addEventListener("change", e=> { // Listen for change in drop down value and act accordingly
     if (design.value === 'heart js'){
        color.previousElementSibling.style.display = '';
        color.style.display = '';
+       color.value = 'none';
        color.options.item(0).hidden = true;
        color.options.item(1).hidden = true;
        color.options.item(2).hidden = true;
@@ -45,6 +46,7 @@ design.addEventListener("click", e=> { // Event listener to listen for change in
     } else if (design.value === 'js puns'){
         color.previousElementSibling.style.display = '';
         color.style.display = '';
+        color.value = 'none';
         color.item(3).hidden = true;
         color.item(4).hidden = true;
         color.item(5).hidden = true;
@@ -52,18 +54,23 @@ design.addEventListener("click", e=> { // Event listener to listen for change in
         color.options.item(1).hidden = false;
         color.options.item(2).hidden = false;
     } else {
-        console.log('Theme not selected');
         color.previousElementSibling.style.display = 'none'; 
         color.style.display = 'none'; 
     }
-
   }); 
 
-// TODO: Only certain color options should be available based on "design" selection
+let fieldset = document.querySelectorAll('fieldset');
+let activities = fieldset.item(2);
 
-// TODO: If "design" choice is changed, color and menu is updated - I think I've accounted for that above
+activities.addEventListener('change', e=> { // Listen for change to checkbox
+    console.log('checked');
+    console.log(e.target.dataset.dayAndTime); // Access dataset for day-and-time
+    
+});
 
 // TODO: Don't allow selection of events happening on the same day and time if one is already selected
+
+// Time value is stored in data-day-and-time. Everytime a checkbox in the field is updated, loop through the fieldset and ensure boxes that are "checked" don't have any values that are identical.
 
 // TODO: When competing activity is unselected, the former state should revert
 
