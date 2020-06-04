@@ -32,19 +32,19 @@ color.style.display = 'none'; // By default don't display color drop down
 color.options[0].hidden = true;
 
 
-design.addEventListener("change", e=> { // Listen for change in drop down value and act accordingly
-    if (design.value === 'heart js'){
-       color.previousElementSibling.style.display = '';
-       color.style.display = '';
-       color.value = 'none';
-       color.options.item(0).hidden = true; // Replace with more DRY code
-       color.options.item(1).hidden = true;
-       color.options.item(2).hidden = true;
-       color.item(3).hidden = false;
-       color.item(4).hidden = false;
-       color.item(5).hidden = false;
-       
-    } else if (design.value === 'js puns'){
+design.addEventListener("change", e => { // Listen for change in drop down value and act accordingly
+    if (design.value === 'heart js') {
+        color.previousElementSibling.style.display = '';
+        color.style.display = '';
+        color.value = 'none';
+        color.options.item(0).hidden = true; // Replace with more DRY code
+        color.options.item(1).hidden = true;
+        color.options.item(2).hidden = true;
+        color.item(3).hidden = false;
+        color.item(4).hidden = false;
+        color.item(5).hidden = false;
+
+    } else if (design.value === 'js puns') {
         color.previousElementSibling.style.display = '';
         color.style.display = '';
         color.value = 'none';
@@ -55,17 +55,30 @@ design.addEventListener("change", e=> { // Listen for change in drop down value 
         color.options.item(1).hidden = false;
         color.options.item(2).hidden = false;
     } else {
-        color.previousElementSibling.style.display = 'none'; 
-        color.style.display = 'none'; 
+        color.previousElementSibling.style.display = 'none';
+        color.style.display = 'none';
     }
-  }); 
+});
 
 let fieldset = document.querySelectorAll('fieldset');
 let activities = fieldset.item(2);
+let payment = fieldset.item(3);
+let div = document.createElement('div');
+activities.append(div);
+activities.addEventListener('change', e => { // Listen for change to checkbox
 
-activities.addEventListener('change', e=> { // Listen for change to checkbox
-    console.log('checked');
-    console.log(e.target.dataset.dayAndTime); // Access dataset for day-and-time
+
+    let checkboxes = activities.querySelectorAll('input');
+    let sum = 0;
+    for (let i = 0; i < checkboxes.length; i++) { // Check status of checkboxes and total the sum of costs
+        if (checkboxes.item(i).checked === true) {
+            sum += parseInt(checkboxes.item(i).dataset.cost);
+
+        } else {
+            console.log('not checked');
+        }
+    }
+    div.textContent = "Total Due: " + "$" + sum;
 
 });
 
