@@ -4,7 +4,7 @@
 let title = document.getElementById('title');
 let newField = document.createElement('input');
 newField.setAttribute('type', 'text');
-newField.style.display = 'none';
+newField.hidden = true; // By default, don't show the text area field created above
 title.parentNode.appendChild(newField);
 
 // Initial focus: Set name field as the initial focus on page load
@@ -18,10 +18,10 @@ window.addEventListener("load", e => {
 
 title.addEventListener('click', e => {
     if (e.target.value === 'other') {
-        newField.style.display = '';
+        newField.hidden = false;
 
     } else
-        newField.style.display = 'none';
+        newField.hidden = true;
 });
 
 // Create logic so that the color dropdown and it's label aren't visible until a design is selected
@@ -87,5 +87,3 @@ activities.addEventListener('change', e => { // Listen for change to checkbox
 // Time value is stored in data-day-and-time. Everytime a checkbox in the field is updated, loop through the fieldset and ensure boxes that are "checked" don't have any values that are identical.
 
 // TODO: When competing activity is unselected, the former state should revert
-
-// TODO: Checked activities should dynamically total up at the bottom
