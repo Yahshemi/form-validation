@@ -1,22 +1,20 @@
 // Global Variables
 
-// Create text field for job title = other
-let title = document.getElementById('title');
-let newField = document.createElement('input');
-newField.setAttribute('type', 'text');
-newField.hidden = true; // By default, don't show the text area field created above
-title.parentNode.appendChild(newField);
 
 // Initial focus: Set name field as the initial focus on page load
 window.addEventListener("load", e => {
     let userName = document.getElementById('name');
     userName.focus();
-
 });
 
-// Add an event listener to hide/show extra text field when other is selected as a role
+// Show and hide a text area based on selection of 'user-title'
+let title = document.getElementById('title');
+let newField = document.createElement('input');
+newField.setAttribute('type', 'text');
+newField.hidden = true;
+title.parentNode.appendChild(newField);
 
-title.addEventListener('click', e => {
+title.addEventListener('change', e => {
     if (e.target.value === 'other') {
         newField.hidden = false;
 
@@ -27,36 +25,36 @@ title.addEventListener('click', e => {
 // Create logic so that the color dropdown and it's label aren't visible until a design is selected
 let design = document.getElementById('design');
 let color = document.getElementById('color');
-color.previousElementSibling.style.display = 'none'; // By default don't display label for color
-color.style.display = 'none'; // By default don't display color drop down
-color.options[0].hidden = true;
+color.previousElementSibling.hidden = true; // By default don't display label for color
+color.hidden = true; // By default don't display color drop down
+color.options[0].hidden = true; // By default, hide the values in the drop down
 
 
-design.addEventListener("change", e => { // Listen for change in drop down value and act accordingly
+design.addEventListener('change', e => { // Listen for change in drop down value and act accordingly
     if (design.value === 'heart js') {
-        color.previousElementSibling.style.display = '';
-        color.style.display = '';
-        color.value = 'none';
-        color.options.item(0).hidden = true; // Replace with more DRY code
+        color.previousElementSibling.hidden = false; // Color label should be visibile
+        color.hidden = false; // Color dropdown should be visible
+        color.value = 'none'; // Default visible value should be blank
+        color.options.item(0).hidden = true; // First 3 color options should be hidden
         color.options.item(1).hidden = true;
         color.options.item(2).hidden = true;
-        color.item(3).hidden = false;
-        color.item(4).hidden = false;
-        color.item(5).hidden = false;
+        color.options.item(3).hidden = false; // Last 3 color options should be visible
+        color.options.item(4).hidden = false;
+        color.options.item(5).hidden = false;
 
     } else if (design.value === 'js puns') {
-        color.previousElementSibling.style.display = '';
-        color.style.display = '';
-        color.value = 'none';
-        color.item(3).hidden = true; // Replace with more DRY code
-        color.item(4).hidden = true;
-        color.item(5).hidden = true;
-        color.options.item(0).hidden = false;
+        color.previousElementSibling.hidden = false; // Color label should be visible
+        color.hidden = false; // Color dropdown should be visible
+        color.value = 'none'; // Default visible value should be blank
+        color.options.item(0).hidden = false; // First 3 color options should be visible
         color.options.item(1).hidden = false;
         color.options.item(2).hidden = false;
+        color.options.item(3).hidden = true; // Last 3 color options should be hidden
+        color.options.item(4).hidden = true;
+        color.options.item(5).hidden = true;
     } else {
-        color.previousElementSibling.style.display = 'none';
-        color.style.display = 'none';
+        color.previousElementSibling.hidden = true;
+        color.hidden = true;
     }
 });
 
@@ -78,7 +76,7 @@ activities.addEventListener('change', e => { // Listen for change to checkbox
             console.log('not checked');
         }
     }
-    div.textContent = "Total Due: " + "$" + sum;
+    div.textContent = 'Total Due: ' + '$' + sum;
 
 });
 
