@@ -1,4 +1,5 @@
 // Global Variables
+let fieldset = document.querySelectorAll('fieldset');
 
 
 // Initial focus: Set name field as the initial focus on page load
@@ -35,6 +36,7 @@ design.addEventListener('change', e => { // Listen for change in drop down value
         color.previousElementSibling.hidden = false; // Color label should be visibile
         color.hidden = false; // Color dropdown should be visible
         color.value = 'none'; // Default visible value should be blank
+
         color.options.item(0).hidden = true; // First 3 color options should be hidden
         color.options.item(1).hidden = true;
         color.options.item(2).hidden = true;
@@ -49,34 +51,30 @@ design.addEventListener('change', e => { // Listen for change in drop down value
         color.options.item(0).hidden = false; // First 3 color options should be visible
         color.options.item(1).hidden = false;
         color.options.item(2).hidden = false;
-        color.options.item(3).hidden = true; // Last 3 color options should be hidden
-        color.options.item(4).hidden = true;
-        color.options.item(5).hidden = true;
+        //  color.options.item(3).hidden = true; // Last 3 color options should be hidden
+        // color.options.item(4).hidden = true;
+        //  color.options.item(5).hidden = true;
     } else {
-        color.previousElementSibling.hidden = true;
+        color.previousElementSibling.hidden = true; // Hide both color label and it's dropdown
         color.hidden = true;
     }
 });
 
-let fieldset = document.querySelectorAll('fieldset');
 let activities = fieldset.item(2);
 let payment = fieldset.item(3);
-let div = document.createElement('div');
+let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
 activities.append(div);
-activities.addEventListener('change', e => { // Listen for change to checkbox
-
+activities.addEventListener('change', e => { // Listen for changes to the fieldset that includes all checkboxes
 
     let checkboxes = activities.querySelectorAll('input');
     let sum = 0;
     for (let i = 0; i < checkboxes.length; i++) { // Check status of checkboxes and total the sum of costs
         if (checkboxes.item(i).checked === true) {
-            sum += parseInt(checkboxes.item(i).dataset.cost);
+            sum += parseInt(checkboxes.item(i).dataset.cost); // Add to the sum variable the integer contained within the dataset
 
-        } else {
-            console.log('not checked');
         }
     }
-    div.textContent = 'Total Due: ' + '$' + sum;
+    div.textContent = 'Total Due: ' + '$' + sum; // Write the integer value of the variable 'sum' to the div that was created
 
 });
 
