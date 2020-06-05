@@ -74,9 +74,14 @@ activities.addEventListener('change', e => { // Listen for changes to the fields
 
         }
     }
+
+
+
     div.textContent = 'Total Due: ' + '$' + sum; // Write the integer value of the variable 'sum' to the div that was created
 
 });
+
+
 
 // TODO: Don't allow selection of events happening on the same day and time if one is already selected
 
