@@ -51,9 +51,9 @@ design.addEventListener('change', e => { // Listen for change in drop down value
         color.options.item(0).hidden = false; // First 3 color options should be visible
         color.options.item(1).hidden = false;
         color.options.item(2).hidden = false;
-        //  color.options.item(3).hidden = true; // Last 3 color options should be hidden
-        // color.options.item(4).hidden = true;
-        //  color.options.item(5).hidden = true;
+        color.options.item(3).hidden = true; // Last 3 color options should be hidden
+        color.options.item(4).hidden = true;
+        color.options.item(5).hidden = true;
     } else {
         color.previousElementSibling.hidden = true; // Hide both color label and it's dropdown
         color.hidden = true;
@@ -67,12 +67,20 @@ activities.append(div);
 activities.addEventListener('change', e => { // Listen for changes to the fieldset that includes all checkboxes
 
     let checkboxes = activities.querySelectorAll('input');
+   // let dayAndTime = activities.querySelectorAll('[data-day-and-time]');
     let sum = 0;
+    
+
+
+
     for (let i = 0; i < checkboxes.length; i++) { // Check status of checkboxes and total the sum of costs
         if (checkboxes.item(i).checked === true) {
             sum += parseInt(checkboxes.item(i).dataset.cost); // Add to the sum variable the integer contained within the dataset
+        } 
 
-        }
+        if (checkboxes.item(i).dataset.dayAndTime )
+
+
     }
 
 
