@@ -8,6 +8,10 @@ window.addEventListener("load", e => {
     userName.focus();
 });
 
+/**********************************************************
+    Basic Information
+ *********************************************************/
+
 // Show and hide a text area based on selection of 'user-title'
 let title = document.getElementById('title');
 let newField = document.createElement('input');
@@ -22,6 +26,10 @@ title.addEventListener('change', e => {
     } else
         newField.hidden = true;
 });
+
+/**********************************************************
+    T-Shirt Information
+ *********************************************************/
 
 // Create logic so that the color dropdown and it's label aren't visible until a design is selected
 let design = document.getElementById('design');
@@ -60,39 +68,44 @@ design.addEventListener('change', e => { // Listen for change in drop down value
     }
 });
 
-let activities = fieldset.item(2);
-let payment = fieldset.item(3);
+/**********************************************************
+    Activity Information
+ *********************************************************/
+
+let activities = fieldset[2];
+let payment = fieldset[3];
 let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
 activities.append(div);
 activities.addEventListener('change', e => { // Listen for changes to the fieldset that includes all checkboxes
-
+    let targetItem = e.target;
+    let targetItemCost = targetItem.getAttribute('data-cost');
+    let targetItemDayAndTime = targetItem.getAttribute('data-day-and-time');
     let checkboxes = activities.querySelectorAll('input');
-   // let dayAndTime = activities.querySelectorAll('[data-day-and-time]');
     let sum = 0;
-    
-
-
 
     for (let i = 0; i < checkboxes.length; i++) { // Check status of checkboxes and total the sum of costs
-        if (checkboxes.item(i).checked === true) {
-            sum += parseInt(checkboxes.item(i).dataset.cost); // Add to the sum variable the integer contained within the dataset
-        } 
+        if (checkboxes[i].checked === true) {
+            sum += parseInt(checkboxes[i].dataset.cost); // Add to the sum variable the integer contained within the dataset
+        }
 
-        if (checkboxes.item(i).dataset.dayAndTime )
+    }
+    div.textContent = 'Total Due: ' + '$' + sum; // Write the integer value of the variable 'sum' to the div that was created
 
+    for (let i = 0; i < checkboxes.length; i++) {
+        let storage = checkboxes[i].getAttribute('data-day-and-time');
+        if (targetItemDayAndTime === storage && targetItem !== checkboxes[i]) {
+            if (targetItem.checked) {
+                checkboxes[i].disabled = true;
+                checkboxes[i].parentNode.style.color = 'gray';
+
+            } else {
+                checkboxes[i].disabled = false;
+                checkboxes[i].parentNode.style.color = 'black';
+            }
+
+        }
 
     }
 
 
-
-    div.textContent = 'Total Due: ' + '$' + sum; // Write the integer value of the variable 'sum' to the div that was created
-
 });
-
-
-
-// TODO: Don't allow selection of events happening on the same day and time if one is already selected
-
-// Time value is stored in data-day-and-time. Everytime a checkbox in the field is updated, loop through the fieldset and ensure boxes that are "checked" don't have any values that are identical.
-
-// TODO: When competing activity is unselected, the former state should revert
