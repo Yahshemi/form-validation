@@ -1,11 +1,27 @@
 // Global Variables
 let fieldset = document.querySelectorAll('fieldset');
-
+let activities = fieldset[2];
+let checkboxes = activities.querySelectorAll('input');
+let payment = fieldset[3];
+let design = document.getElementById('design');
+let color = document.getElementById('color');
+let title = document.getElementById('title');
+let newField = document.createElement('input');
+let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
+let paymentMethod = document.getElementById('payment');
 
 // Initial focus: Set name field as the initial focus on page load
 window.addEventListener("load", e => {
     let userName = document.getElementById('name');
     userName.focus();
+    for (let i = 0; i < checkboxes.length; i++) { // Reset checkbox selection
+        checkboxes[i].checked = false;
+    }
+
+    title.value = 'none';
+    design.value = 'Select Theme';
+
+
 });
 
 /**********************************************************
@@ -13,8 +29,7 @@ window.addEventListener("load", e => {
  *********************************************************/
 
 // Show and hide a text area based on selection of 'user-title'
-let title = document.getElementById('title');
-let newField = document.createElement('input');
+
 newField.setAttribute('type', 'text');
 newField.hidden = true;
 title.parentNode.appendChild(newField);
@@ -32,8 +47,7 @@ title.addEventListener('change', e => {
  *********************************************************/
 
 // Create logic so that the color dropdown and it's label aren't visible until a design is selected
-let design = document.getElementById('design');
-let color = document.getElementById('color');
+
 color.previousElementSibling.hidden = true; // By default don't display label for color
 color.hidden = true; // By default don't display color drop down
 color.options[0].hidden = true; // By default, hide the values in the drop down
@@ -44,7 +58,6 @@ design.addEventListener('change', e => { // Listen for change in drop down value
         color.previousElementSibling.hidden = false; // Color label should be visibile
         color.hidden = false; // Color dropdown should be visible
         color.value = 'none'; // Default visible value should be blank
-
         color.options.item(0).hidden = true; // First 3 color options should be hidden
         color.options.item(1).hidden = true;
         color.options.item(2).hidden = true;
@@ -72,22 +85,17 @@ design.addEventListener('change', e => { // Listen for change in drop down value
     Activity Information
  *********************************************************/
 
-let activities = fieldset[2];
-let payment = fieldset[3];
-let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
+
 activities.append(div);
 activities.addEventListener('change', e => { // Listen for changes to the fieldset that includes all checkboxes
     let targetItem = e.target;
-    let targetItemCost = targetItem.getAttribute('data-cost');
     let targetItemDayAndTime = targetItem.getAttribute('data-day-and-time');
-    let checkboxes = activities.querySelectorAll('input');
     let sum = 0;
 
     for (let i = 0; i < checkboxes.length; i++) { // Check status of checkboxes and total the sum of costs
         if (checkboxes[i].checked === true) {
             sum += parseInt(checkboxes[i].dataset.cost); // Add to the sum variable the integer contained within the dataset
         }
-
     }
     div.textContent = 'Total Due: ' + '$' + sum; // Write the integer value of the variable 'sum' to the div that was created
 
@@ -97,7 +105,6 @@ activities.addEventListener('change', e => { // Listen for changes to the fields
             if (targetItem.checked) {
                 checkboxes[i].disabled = true;
                 checkboxes[i].parentNode.style.color = 'gray';
-
             } else {
                 checkboxes[i].disabled = false;
                 checkboxes[i].parentNode.style.color = 'black';
@@ -106,6 +113,34 @@ activities.addEventListener('change', e => { // Listen for changes to the fields
         }
 
     }
-
-
 });
+
+/**********************************************************
+    Payment Information
+ *********************************************************/
+
+payment.addEventListener('change', e => {
+    let creditCardText = document.getElementById('credit-card');
+    let paypalText = document.getElementById('paypal');
+    let bitcoinText = document.getElementById('bitcoin');
+    if (paymentMethod.value === 'credit card') {
+        creditCardText.hidden = false;
+        paypalText.hidden = true;
+        bitcoinText.hidden = true;
+    } else if (paymentMethod.value === 'paypal') {
+        creditCardText.hidden = true;
+        paypalText.hidden = false;
+        bitcoinText.hidden = true;
+    } else if (paymentMethod.value = 'bitcoin') {
+        creditCardText.hidden = true;
+        paypalText.hidden = true;
+        bitcoinText.hidden = false;
+    }
+});
+
+
+
+//Display payment sections based on the payment option chosen in the select menu.
+//The "Credit Card" payment option should be selected by default. Display the #credit-card div, and hide the "PayPal" and "Bitcoin" information. Payment option in the select menu should match the payment option displayed on the page.
+//When a user selects the "PayPal" payment option, the PayPal information should display, and the credit card and “Bitcoin” information should be hidden.
+//When a user selects the "Bitcoin" payment option, the Bitcoin information should display, and the credit card and “PayPal” information should be hidden.
