@@ -118,16 +118,19 @@ activities.addEventListener('change', e => { // Listen for changes to the fields
 /**********************************************************
     Payment Information
  *********************************************************/
-
-payment.addEventListener('change', e => {
-    let creditCardText = document.getElementById('credit-card');
-    let paypalText = document.getElementById('paypal');
-    let bitcoinText = document.getElementById('bitcoin');
+let creditCardText = document.getElementById('credit-card'); // Select the appropriate text for each case
+let paypalText = document.getElementById('paypal');
+let bitcoinText = document.getElementById('bitcoin');
+paymentMethod[1].selected = true; // By default set non-credit card items to hidden
+paypalText.hidden = true;
+bitcoinText.hidden = true;
+payment.addEventListener('change', e => { // Listen for a change in the selection input and react accordingly
     if (paymentMethod.value === 'credit card') {
         creditCardText.hidden = false;
         paypalText.hidden = true;
         bitcoinText.hidden = true;
-    } else if (paymentMethod.value === 'paypal') {
+    } else
+    if (paymentMethod.value === 'paypal') {
         creditCardText.hidden = true;
         paypalText.hidden = false;
         bitcoinText.hidden = true;
@@ -137,10 +140,3 @@ payment.addEventListener('change', e => {
         bitcoinText.hidden = false;
     }
 });
-
-
-
-//Display payment sections based on the payment option chosen in the select menu.
-//The "Credit Card" payment option should be selected by default. Display the #credit-card div, and hide the "PayPal" and "Bitcoin" information. Payment option in the select menu should match the payment option displayed on the page.
-//When a user selects the "PayPal" payment option, the PayPal information should display, and the credit card and “Bitcoin” information should be hidden.
-//When a user selects the "Bitcoin" payment option, the Bitcoin information should display, and the credit card and “PayPal” information should be hidden.
