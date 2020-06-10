@@ -20,9 +20,22 @@ window.addEventListener("load", e => {
 
     title.value = 'none';
     design.value = 'Select Theme';
-
-
 });
+
+// Hide/show functions to control display for users
+
+let hide = function() {
+    for (let i = 0; i < arguments.length; i++) {
+        arguments[i].hidden = true;
+    }
+}
+let show = function() {
+    for (let i = 0; i < arguments.length; i++) {
+        arguments[i].hidden = false;
+    }
+}
+
+
 
 /**********************************************************
     Basic Information
@@ -31,15 +44,14 @@ window.addEventListener("load", e => {
 // Show and hide a text area based on selection of 'user-title'
 
 newField.setAttribute('type', 'text');
-newField.hidden = true;
+hide(newField);
 title.parentNode.appendChild(newField);
 
 title.addEventListener('change', e => {
     if (e.target.value === 'other') {
-        newField.hidden = false;
-
+        show(newField);
     } else
-        newField.hidden = true;
+        hide(newField);
 });
 
 /**********************************************************
@@ -48,36 +60,25 @@ title.addEventListener('change', e => {
 
 // Create logic so that the color dropdown and it's label aren't visible until a design is selected
 
-color.previousElementSibling.hidden = true; // By default don't display label for color
-color.hidden = true; // By default don't display color drop down
-color.options[0].hidden = true; // By default, hide the values in the drop down
+let colorDiv = document.getElementById('colors-js-puns');
+let colorOptions = colorDiv.querySelectorAll('option');
+hide(colorDiv);
 
 
 design.addEventListener('change', e => { // Listen for change in drop down value and act accordingly
     if (design.value === 'heart js') {
-        color.previousElementSibling.hidden = false; // Color label should be visibile
-        color.hidden = false; // Color dropdown should be visible
+        show(colorDiv);
         color.value = 'none'; // Default visible value should be blank
-        color.options.item(0).hidden = true; // First 3 color options should be hidden
-        color.options.item(1).hidden = true;
-        color.options.item(2).hidden = true;
-        color.options.item(3).hidden = false; // Last 3 color options should be visible
-        color.options.item(4).hidden = false;
-        color.options.item(5).hidden = false;
-
+        hide(colorOptions[0], colorOptions[1], colorOptions[2]);
+        show(colorOptions[3], colorOptions[4], colorOptions[5]);
     } else if (design.value === 'js puns') {
-        color.previousElementSibling.hidden = false; // Color label should be visible
-        color.hidden = false; // Color dropdown should be visible
+        show(colorDiv);
         color.value = 'none'; // Default visible value should be blank
-        color.options.item(0).hidden = false; // First 3 color options should be visible
-        color.options.item(1).hidden = false;
-        color.options.item(2).hidden = false;
-        color.options.item(3).hidden = true; // Last 3 color options should be hidden
-        color.options.item(4).hidden = true;
-        color.options.item(5).hidden = true;
+        hide(colorOptions[3], colorOptions[4], colorOptions[5]);
+        show(colorOptions[0], colorOptions[1], colorOptions[2]);
     } else {
-        color.previousElementSibling.hidden = true; // Hide both color label and it's dropdown
-        color.hidden = true;
+        hide(colorDiv);
+
     }
 });
 
@@ -118,25 +119,21 @@ activities.addEventListener('change', e => { // Listen for changes to the fields
 /**********************************************************
     Payment Information
  *********************************************************/
+
 let creditCardText = document.getElementById('credit-card'); // Select the appropriate text for each case
 let paypalText = document.getElementById('paypal');
 let bitcoinText = document.getElementById('bitcoin');
 paymentMethod[1].selected = true; // By default set non-credit card items to hidden
-paypalText.hidden = true;
-bitcoinText.hidden = true;
+hide(paypalText, bitcoinText);
 payment.addEventListener('change', e => { // Listen for a change in the selection input and react accordingly
     if (paymentMethod.value === 'credit card') {
-        creditCardText.hidden = false;
-        paypalText.hidden = true;
-        bitcoinText.hidden = true;
-    } else
-    if (paymentMethod.value === 'paypal') {
-        creditCardText.hidden = true;
-        paypalText.hidden = false;
-        bitcoinText.hidden = true;
+        hide(paypalText, bitcoinText);
+        show(creditCardText);
+    } else if (paymentMethod.value === 'paypal') {
+        hide(creditCardText, bitcoinText);
+        show(paypalText);
     } else if (paymentMethod.value = 'bitcoin') {
-        creditCardText.hidden = true;
-        paypalText.hidden = true;
-        bitcoinText.hidden = false;
+        hide(creditCardText, paypalText);
+        show(bitcoinText);
     }
 });
