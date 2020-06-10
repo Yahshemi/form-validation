@@ -17,9 +17,6 @@ window.addEventListener("load", e => {
     for (let i = 0; i < checkboxes.length; i++) { // Reset checkbox selection
         checkboxes[i].checked = false;
     }
-
-    title.value = 'none';
-    design.value = 'Select Theme';
 });
 
 // Hide/show functions to control display for users
@@ -34,8 +31,6 @@ let show = function() {
         arguments[i].hidden = false;
     }
 }
-
-
 
 /**********************************************************
     Basic Information
