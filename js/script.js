@@ -29,8 +29,30 @@ let show = function() {
         }
     }
     /**********************************************************
-        Basic Information
-     *********************************************************/
+            Basic Information
+    *********************************************************/
+let fieldName = document.getElementById('name');
+fieldName.addEventListener('keyup', e => {
+    validName(e.target);
+});
+
+const validName = () => {
+    let userName = fieldName.value;
+    if (userName.length < 1) {
+        console.log('userName is blank');
+    } else {
+        console.log('userName has been provided');
+    }
+}
+
+let fieldEmail = document.getElementById('mail');
+fieldEmail.addEventListener('keyup', e => {
+    validEmail(e.target);
+});
+
+
+
+
 
 // Show and hide a text area based on selection of 'user-title'
 let title = document.getElementById('title');
@@ -124,5 +146,9 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
     } else if (paymentMethod.value = 'bitcoin') {
         hide(creditCardText, paypalText);
         show(bitcoinText);
+    } else {
+        paymentMethod.value = 'credit card';
+        hide(paypalText, bitcoinText);
+        show(creditCardText);
     }
 });
