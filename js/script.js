@@ -1,16 +1,13 @@
-// Global Variables
+/**********************************************************
+    Global Variables
+ *********************************************************/
 let fieldset = document.querySelectorAll('fieldset');
-let activities = fieldset[2];
-let checkboxes = activities.querySelectorAll('input');
-let payment = fieldset[3];
-let design = document.getElementById('design');
-let color = document.getElementById('color');
-let title = document.getElementById('title');
 let newField = document.createElement('input');
 let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
-let paymentMethod = document.getElementById('payment');
+/**********************************************************
+    Setup
+ *********************************************************/
 
-// Initial focus: Set name field as the initial focus on page load
 window.addEventListener("load", e => {
     let userName = document.getElementById('name');
     userName.focus();
@@ -18,25 +15,25 @@ window.addEventListener("load", e => {
         checkboxes[i].checked = false;
     }
 });
-
-// Hide/show functions to control display for users
-
+/**********************************************************
+    Functions
+ *********************************************************/
 let hide = function() {
     for (let i = 0; i < arguments.length; i++) {
         arguments[i].hidden = true;
     }
 }
 let show = function() {
-    for (let i = 0; i < arguments.length; i++) {
-        arguments[i].hidden = false;
+        for (let i = 0; i < arguments.length; i++) {
+            arguments[i].hidden = false;
+        }
     }
-}
-
-/**********************************************************
-    Basic Information
- *********************************************************/
+    /**********************************************************
+        Basic Information
+     *********************************************************/
 
 // Show and hide a text area based on selection of 'user-title'
+let title = document.getElementById('title');
 
 newField.setAttribute('type', 'text');
 hide(newField);
@@ -48,17 +45,14 @@ title.addEventListener('change', e => {
     } else
         hide(newField);
 });
-
 /**********************************************************
     T-Shirt Information
  *********************************************************/
-
-// Create logic so that the color dropdown and it's label aren't visible until a design is selected
-
+let design = document.getElementById('design');
+let color = document.getElementById('color');
 let colorDiv = document.getElementById('colors-js-puns');
 let colorOptions = colorDiv.querySelectorAll('option');
 hide(colorDiv);
-
 
 design.addEventListener('change', e => { // Listen for change in drop down value and act accordingly
     if (design.value === 'heart js') {
@@ -76,12 +70,11 @@ design.addEventListener('change', e => { // Listen for change in drop down value
 
     }
 });
-
 /**********************************************************
     Activity Information
  *********************************************************/
-
-
+let activities = fieldset[2];
+let checkboxes = activities.querySelectorAll('input');
 activities.append(div);
 activities.addEventListener('change', e => { // Listen for changes to the fieldset that includes all checkboxes
     let targetItem = e.target;
@@ -110,16 +103,17 @@ activities.addEventListener('change', e => { // Listen for changes to the fields
 
     }
 });
-
 /**********************************************************
     Payment Information
  *********************************************************/
-
+let payment = fieldset[3];
+let paymentMethod = document.getElementById('payment');
 let creditCardText = document.getElementById('credit-card'); // Select the appropriate text for each case
 let paypalText = document.getElementById('paypal');
 let bitcoinText = document.getElementById('bitcoin');
 paymentMethod[1].selected = true; // By default set non-credit card items to hidden
 hide(paypalText, bitcoinText);
+
 payment.addEventListener('change', e => { // Listen for a change in the selection input and react accordingly
     if (paymentMethod.value === 'credit card') {
         hide(paypalText, bitcoinText);
