@@ -142,24 +142,40 @@ let form = document.querySelector('form');
 form.addEventListener("submit", validate);
 
 function validate () {
-    let passedTests = 0;
-    let inputName = fieldset[0].firstElementChild.nextElementSibling.nextElementSibling;
+    let submittedName = document.getElementById('name').value;
+    let submittedEmail = document.getElementById('mail').value;
+    validateName(submittedName);
+    validateEmail(submittedEmail);
+    validateActivities();
+}
 
     // Is the name blank?
-    if (inputName.value.length < 1){
-        alert(passedTests + ' Passed Tests');
-    } else {
-        passedTests ++;
-        alert(passedTests + ' Passed Tests');
-
+    function validateName (string){
+      if (string.length < 1){
+        alert('Name field is blank. ' + string.length + ' characters were entered')
+      } else {
+          return true;
+      }
     }
+ 
 
     // Is the email in the valid format?
+    function validateEmail (string){
+      
+      if (string.length < 1) {
+        alert(' Email field is blank. ' + string.length + ' characters were entered')
+        } else if (true){
+            alert('Text Entered');
+        } 
 
-
+    }
     
-
     // Has at least one checkbox been checked?
+
+    function validateActivities () {
+        alert('Validating Activity Checkboxes');
+
+    }
     // Has credit card been selected?
     // If credit card has been selected:
         // Is CC#, Zip, CVV filled in?
@@ -167,7 +183,6 @@ function validate () {
         // Is Zip Code 5 digits?
         // Is CVV 3 digits?
 
-}
 
 
 
