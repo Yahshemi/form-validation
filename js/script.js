@@ -32,23 +32,36 @@ let show = function() {
             Basic Information
     *********************************************************/
 let fieldName = document.getElementById('name');
-fieldName.addEventListener('keyup', e => {
+let fieldEmail = document.getElementById('mail');
+let fieldTitle = document.getElementById('title');
+
+fieldName.addEventListener('keyup', e => { //
     validName(e.target);
 });
 
 const validName = () => {
     let userName = fieldName.value;
+    
     if (userName.length < 1) {
-        console.log('userName is blank');
+        console.log('userName is empty');
+        fieldName.style.border = '2px solid rgb(255, 0, 0)';
+        fieldName.placeholder = 'Value is required';
     } else {
-        console.log('userName has been provided');
+        console.log('userName is not empty');
     }
 }
 
-let fieldEmail = document.getElementById('mail');
-fieldEmail.addEventListener('keyup', e => {
-    validEmail(e.target);
+fieldEmail.addEventListener('keyup', e=>{
+    let userEmail = fieldEmail.value;
+    if (userEmail.length < 1) {
+        console.log('userEmail is empty');
+        fieldEmail.style.border = '2px solid rgb(255, 0, 0)';
+        fieldEmail.placeholder = 'Value is required';
+    } else {
+        console.log('userEmail is not empty');
+    }
 });
+
 
 
 
