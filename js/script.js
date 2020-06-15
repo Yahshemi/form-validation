@@ -142,17 +142,23 @@ let form = document.querySelector('form');
 form.addEventListener("submit", validate);
 
 function validate () {
+    let passedTests = 0;
     let inputName = fieldset[0].firstElementChild.nextElementSibling.nextElementSibling;
 
     // Is the name blank?
     if (inputName.value.length < 1){
-        inputName.style.border = '2px solid red';
+        alert(passedTests + ' Passed Tests');
     } else {
-        alert('Form has been submitted');
+        passedTests ++;
+        alert(passedTests + ' Passed Tests');
 
     }
 
     // Is the email in the valid format?
+
+
+    
+
     // Has at least one checkbox been checked?
     // Has credit card been selected?
     // If credit card has been selected:
