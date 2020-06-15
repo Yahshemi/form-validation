@@ -184,10 +184,6 @@ function validate () {
             alert('No boxes were selected');
     }
 
-    
-
-
-
     }
     // Has credit card been selected?
     // If credit card has been selected:
