@@ -158,7 +158,6 @@ function validate () {
       }
     }
  
-
     // Is the email in the valid format?
     function validateEmail (string){
       let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -173,7 +172,21 @@ function validate () {
     // Has at least one checkbox been checked?
 
     function validateActivities () {
-        alert('Validating Activity Checkboxes');
+    let boxesSelected = 0;
+    for (i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked === true){
+            boxesSelected ++;
+            }
+        } 
+        if (boxesSelected > 0){
+          return true;
+        } else {
+            alert('No boxes were selected');
+    }
+
+    
+
+
 
     }
     // Has credit card been selected?
