@@ -161,15 +161,15 @@ function validate () {
 
     // Is the email in the valid format?
     function validateEmail (string){
-      
+      let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (string.length < 1) {
         alert(' Email field is blank. ' + string.length + ' characters were entered')
-        } else if (true){
-            alert('Text Entered');
-        } 
-
+        } else if (regex.test(string)){
+            return true;
+        } else{
+            alert('Make sure your email address is properly formatted!');
+        }
     }
-    
     // Has at least one checkbox been checked?
 
     function validateActivities () {
