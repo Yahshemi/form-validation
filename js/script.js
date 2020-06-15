@@ -10,7 +10,7 @@ let div = document.createElement('div'); // Create a new div and add it below th
 
 window.addEventListener("load", e => {
     let userName = document.getElementById('name');
-    userName.focus();
+    userName.focus(); 
     for (let i = 0; i < checkboxes.length; i++) { // Reset checkbox selection
         checkboxes[i].checked = false;
     }
@@ -31,38 +31,6 @@ let show = function() {
     /**********************************************************
             Basic Information
     *********************************************************/
-let fieldName = document.getElementById('name');
-let fieldEmail = document.getElementById('mail');
-let fieldTitle = document.getElementById('title');
-
-fieldName.addEventListener('keyup', e => { //
-    validName(e.target);
-});
-
-const validName = () => {
-    let userName = fieldName.value;
-    
-    if (userName.length < 1) {
-        console.log('userName is empty');
-        fieldName.style.border = '2px solid rgb(255, 0, 0)';
-        fieldName.placeholder = 'Value is required';
-    } else {
-        console.log('userName is not empty');
-    }
-}
-
-fieldEmail.addEventListener('keyup', e=>{
-    let userEmail = fieldEmail.value;
-    if (userEmail.length < 1) {
-        console.log('userEmail is empty');
-        fieldEmail.style.border = '2px solid rgb(255, 0, 0)';
-        fieldEmail.placeholder = 'Value is required';
-    } else {
-        console.log('userEmail is not empty');
-    }
-});
-
-
 
 
 
@@ -165,3 +133,35 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
         show(creditCardText);
     }
 });
+
+/**********************************************************
+   Submission Validation
+ *********************************************************/
+
+let form = document.querySelector('form');
+form.addEventListener("submit", validate);
+
+function validate () {
+    let inputName = fieldset[0].firstElementChild.nextElementSibling.nextElementSibling;
+
+    // Is the name blank?
+    if (inputName.value.length < 1){
+        inputName.style.border = '2px solid red';
+    } else {
+        alert('Form has been submitted');
+
+    }
+
+    // Is the email in the valid format?
+    // Has at least one checkbox been checked?
+    // Has credit card been selected?
+    // If credit card has been selected:
+        // Is CC#, Zip, CVV filled in?
+        // Is CC# between 13-16 digits?
+        // Is Zip Code 5 digits?
+        // Is CVV 3 digits?
+
+}
+
+
+
