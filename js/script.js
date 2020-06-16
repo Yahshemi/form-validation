@@ -188,10 +188,23 @@ function validate () {
         let submittedCvv = document.getElementById('cvv').value;
         if (string === 'credit card'){
             if (submittedCc.length > 0 && submittedCc.length > 12 && submittedCc.length < 16){ 
-                alert('valid')
+                console.log('Submitted cc# is valid');
             } else {
-                alert('Missing something');
+                return false;
             }
+            if (submittedZip.length > 0 && submittedZip.length === 5){
+                console.log('Submitted zipcode is valid');
+            } else {
+                return false;
+            }
+
+            if (submittedCvv.length > 0 && submittedCvv.length === 3){
+                console.log('Submitted CVV is valid');
+            } else {
+                returnToPreviousPage();
+            }
+
+        
 
             
 
