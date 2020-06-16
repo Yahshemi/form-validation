@@ -1,12 +1,20 @@
-/**********************************************************
-    Global Variables
- *********************************************************/
-let fieldset = document.querySelectorAll('fieldset');
-let newField = document.createElement('input');
-let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
+/******************************************
+Student: Cooper Hollmaier
+Project: Techdegree - Unit 3
+Intended Behavior: Interactive Form
+Goal: Exceeds Expecatations
+******************************************/
+
 /**********************************************************
     Setup
  *********************************************************/
+
+// Global variables
+let fieldset = document.querySelectorAll('fieldset');
+let newField = document.createElement('input');
+let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
+
+// Onload events
 window.addEventListener("load", e => {
     let userName = document.getElementById('name');
     userName.focus();
@@ -14,9 +22,8 @@ window.addEventListener("load", e => {
         checkboxes[i].checked = false;
     }
 });
-/**********************************************************
-    Functions
- *********************************************************/
+
+// Helper functions
 let hide = function() {
     for (let i = 0; i < arguments.length; i++) {
         arguments[i].hidden = true;
@@ -28,7 +35,7 @@ let show = function() {
         }
     }
     /**********************************************************
-                Basic Information
+    Basic Info
     *********************************************************/
     // Show and hide a text area based on selection of 'user-title'
 let title = document.getElementById('title');
@@ -44,8 +51,8 @@ title.addEventListener('change', e => {
         hide(newField);
 });
 /**********************************************************
-    T-Shirt Information
- *********************************************************/
+T-shirt Info
+ ********************************************************/
 let design = document.getElementById('design');
 let color = document.getElementById('color');
 let colorDiv = document.getElementById('colors-js-puns');
@@ -69,8 +76,8 @@ design.addEventListener('change', e => { // Listen for change in drop down value
     }
 });
 /**********************************************************
-    Activity Information
- *********************************************************/
+Register for Activities
+*********************************************************/
 let activities = fieldset[2];
 let checkboxes = activities.querySelectorAll('input');
 activities.append(div);
@@ -102,7 +109,7 @@ activities.addEventListener('change', e => { // Listen for changes to the fields
     }
 });
 /**********************************************************
-    Payment Information
+Payment Info
  *********************************************************/
 let payment = fieldset[3];
 let paymentMethod = document.getElementById('payment');
@@ -129,7 +136,7 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
     }
 });
 /**********************************************************
-   Submission Validation
+ Validation
  *********************************************************/
 
 let form = document.querySelector('form');
@@ -201,6 +208,10 @@ function validatePayment(string) {
     return true;
 }
 
+/**********************************************************
+ Regression Tests for Grading
+ *********************************************************/
+
 // True — Focus on the first field
 // True — "Your job role" text field appears when user selects "Other" from the Job Role menu.
 //      — Until a theme is selected from the “Design” menu, no color options appear in the “Color” drop down and the “Color” field reads “Please select a T-shirt theme”.
@@ -211,3 +222,11 @@ function validatePayment(string) {
 // True — The "Credit Card" payment option is selected by default.
 // True — Payment option in the select menu matches the payment option displayed on the page.
 // True — When a user chooses a payment option, the chosen payment section is revealed and the other payment sections are hidden.
+//      — Form cannot be submitted if name is blank.
+//      — Form cannot be submitted if email field isn't formatted correctly.
+//      — Form cannot be submitted if no activities are selected.
+//      — Form cannot be submitted if credit card is selected and CC# isn't 13-16 digits.
+//      — Form cannot be submitted if credit card is selected and zipcode isn't 5 digits.
+//      — Form cannot be submitted if credit card is selected and CVV isn't 3 digits.
+//      — At least one field does real time data validation.
+//      — Without JavaScript all form fields and payment information is displayed.
