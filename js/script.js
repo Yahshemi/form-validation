@@ -7,7 +7,6 @@ let div = document.createElement('div'); // Create a new div and add it below th
 /**********************************************************
     Setup
  *********************************************************/
-
 window.addEventListener("load", e => {
     let userName = document.getElementById('name');
     userName.focus(); 
@@ -28,13 +27,9 @@ let show = function() {
             arguments[i].hidden = false;
         }
     }
-    /**********************************************************
+/**********************************************************
             Basic Information
-    *********************************************************/
-
-
-
-
+*********************************************************/
 // Show and hide a text area based on selection of 'user-title'
 let title = document.getElementById('title');
 
@@ -133,7 +128,6 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
         show(creditCardText);
     }
 });
-
 /**********************************************************
    Submission Validation
  *********************************************************/
@@ -144,9 +138,11 @@ form.addEventListener("submit", validate);
 function validate () {
     let submittedName = document.getElementById('name').value;
     let submittedEmail = document.getElementById('mail').value;
+    let submittedPayment = document.getElementById('payment').value;
     validateName(submittedName);
     validateEmail(submittedEmail);
     validateActivities();
+    validatePayment(submittedPayment);
 }
 
     // Is the name blank?
@@ -185,13 +181,32 @@ function validate () {
     }
 
     }
-    // Has credit card been selected?
-    // If credit card has been selected:
-        // Is CC#, Zip, CVV filled in?
+   // Has credit card been selected?
+    function validatePayment (string) {
+        let submittedCc =  document.getElementById('cc-num').value;
+        let submittedZip = document.getElementById('zip').value;
+        let submittedCvv = document.getElementById('cvv').value;
+        if (string === 'credit card'){
+            if (submittedCc.length > 0 && submittedCc.length > 12 && submittedCc.length < 16){ 
+                alert('valid')
+            } else {
+                alert('Missing something');
+            }
+
+            
+
+       
         // Is CC# between 13-16 digits?
         // Is Zip Code 5 digits?
         // Is CVV 3 digits?
 
+            alert('credit card selected');
+        } else {
+            alert('virtual payment selected');
+        }
+    }
+ 
+    
 
 
 
