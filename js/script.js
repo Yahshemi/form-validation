@@ -17,20 +17,20 @@ window.addEventListener("load", e => {
 /**********************************************************
     Functions
  *********************************************************/
-let hide = function () {
+let hide = function() {
     for (let i = 0; i < arguments.length; i++) {
         arguments[i].hidden = true;
     }
 }
-let show = function () {
-    for (let i = 0; i < arguments.length; i++) {
-        arguments[i].hidden = false;
+let show = function() {
+        for (let i = 0; i < arguments.length; i++) {
+            arguments[i].hidden = false;
+        }
     }
-}
-/**********************************************************
-            Basic Information
-*********************************************************/
-// Show and hide a text area based on selection of 'user-title'
+    /**********************************************************
+                Basic Information
+    *********************************************************/
+    // Show and hide a text area based on selection of 'user-title'
 let title = document.getElementById('title');
 
 newField.setAttribute('type', 'text');
@@ -181,6 +181,7 @@ function validateActivities() {
     }
 
 }
+
 function validatePayment(string) {
     let submittedCc = document.getElementById('cc-num').value;
     let submittedZip = document.getElementById('zip').value;
@@ -194,16 +195,8 @@ function validatePayment(string) {
         }
         if (submittedCvv.length > 0 && submittedCvv.length === 3) {
             return true;
-        } 
-            returnToPreviousPage();
         }
-return true;
-    } 
-
-
+        returnToPreviousPage();
+    }
+    return true;
 }
-
-
-
-
-
