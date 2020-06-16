@@ -187,25 +187,20 @@ function validatePayment(string) {
     let submittedCvv = document.getElementById('cvv').value;
     if (string === 'credit card') {
         if (submittedCc.length > 0 && submittedCc.length > 12 && submittedCc.length < 16) {
-            console.log('Submitted cc # is valid');
-        } else {
-            console.log('Error with cc #');
+            return true;
         }
         if (submittedZip.length > 0 && submittedZip.length === 5) {
-            console.log('Submitted zipcode is valid');
-        } else {
-            console.log('Error with zip code');
+            return true;
         }
         if (submittedCvv.length > 0 && submittedCvv.length === 3) {
-            console.log('Submitted CVV is valid');
-        } else {
-            console.log('Error with CVV');
+            return true;
+        } 
             returnToPreviousPage();
         }
+return true;
+    } 
 
-    } else {
-        return true;
-    }
+
 }
 
 
