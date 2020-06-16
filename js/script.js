@@ -143,16 +143,27 @@ let form = document.querySelector('form');
 form.addEventListener("submit", validate);
 
 function validate() {
-    let submittedName = document.getElementById('name').value;
-    let submittedEmail = document.getElementById('mail').value;
-    let submittedPayment = document.getElementById('payment').value;
-    validateName(submittedName);
-    validateEmail(submittedEmail);
-    validateActivities();
-    validatePayment(submittedPayment);
+    let submittedName = document.getElementById('name').value; // user submitted text for name field
+    let submittedEmail = document.getElementById('mail').value; // user submitted text for email field
+    let submittedPayment = document.getElementById('payment').value; // user submitted value for payment selection field
+
+    if (submittedName.length < 1) { // Check if the name field is blank
+        alert('Validation failed');
+        return false;
+    } else {
+        alert('Good');
+        return true;
+    }
+
+
+
+    /* validateName(submittedName);
+     validateEmail(submittedEmail);
+     validateActivities();
+     validatePayment(submittedPayment);*/
 }
 
-// Is the name blank?
+/*// Is the name blank?
 function validateName(string) {
     if (string.length < 1) {
         alert('Name field is blank. ' + string.length + ' characters were entered')
@@ -222,7 +233,7 @@ function validatePayment(string) {
 // True — The "Credit Card" payment option is selected by default.
 // True — Payment option in the select menu matches the payment option displayed on the page.
 // True — When a user chooses a payment option, the chosen payment section is revealed and the other payment sections are hidden.
-//      — Form cannot be submitted if name is blank.
+// True — Form cannot be submitted if name is blank.
 //      — Form cannot be submitted if email field isn't formatted correctly.
 //      — Form cannot be submitted if no activities are selected.
 //      — Form cannot be submitted if credit card is selected and CC# isn't 13-16 digits.
