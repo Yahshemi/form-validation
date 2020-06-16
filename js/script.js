@@ -188,32 +188,22 @@ function validate () {
         let submittedCvv = document.getElementById('cvv').value;
         if (string === 'credit card'){
             if (submittedCc.length > 0 && submittedCc.length > 12 && submittedCc.length < 16){ 
-                console.log('Submitted cc# is valid');
+                console.log('Submitted cc # is valid');
             } else {
-                return false;
+                console.log('Error with cc #');
             }
             if (submittedZip.length > 0 && submittedZip.length === 5){
                 console.log('Submitted zipcode is valid');
             } else {
-                return false;
+                console.log('Error with zip code');
             }
-
             if (submittedCvv.length > 0 && submittedCvv.length === 3){
                 console.log('Submitted CVV is valid');
             } else {
+                console.log('Error with CVV');
                 returnToPreviousPage();
             }
 
-        
-
-            
-
-       
-        // Is CC# between 13-16 digits?
-        // Is Zip Code 5 digits?
-        // Is CVV 3 digits?
-
-            alert('credit card selected');
         } else {
             alert('virtual payment selected');
         }
