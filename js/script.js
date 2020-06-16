@@ -200,3 +200,14 @@ function validatePayment(string) {
     }
     return true;
 }
+
+// True — Focus on the first field
+// True — "Your job role" text field appears when user selects "Other" from the Job Role menu.
+//      — Until a theme is selected from the “Design” menu, no color options appear in the “Color” drop down and the “Color” field reads “Please select a T-shirt theme”.
+// True — When a new theme is selected from the "Design" menu, the "Color" field and drop down menu is updated.
+// True — “Color” drop down menu is hidden until a T-Shirt design is selected.
+// True — User cannot select two activities that are at the same time.
+// True — Total cost of selected activities is calculated and displayed below the list of activities.
+// True — The "Credit Card" payment option is selected by default.
+// True — Payment option in the select menu matches the payment option displayed on the page.
+// True — When a user chooses a payment option, the chosen payment section is revealed and the other payment sections are hidden.
