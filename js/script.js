@@ -9,7 +9,7 @@ let div = document.createElement('div'); // Create a new div and add it below th
  *********************************************************/
 window.addEventListener("load", e => {
     let userName = document.getElementById('name');
-    userName.focus(); 
+    userName.focus();
     for (let i = 0; i < checkboxes.length; i++) { // Reset checkbox selection
         checkboxes[i].checked = false;
     }
@@ -17,16 +17,16 @@ window.addEventListener("load", e => {
 /**********************************************************
     Functions
  *********************************************************/
-let hide = function() {
+let hide = function () {
     for (let i = 0; i < arguments.length; i++) {
         arguments[i].hidden = true;
     }
 }
-let show = function() {
-        for (let i = 0; i < arguments.length; i++) {
-            arguments[i].hidden = false;
-        }
+let show = function () {
+    for (let i = 0; i < arguments.length; i++) {
+        arguments[i].hidden = false;
     }
+}
 /**********************************************************
             Basic Information
 *********************************************************/
@@ -135,7 +135,7 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
 let form = document.querySelector('form');
 form.addEventListener("submit", validate);
 
-function validate () {
+function validate() {
     let submittedName = document.getElementById('name').value;
     let submittedEmail = document.getElementById('mail').value;
     let submittedPayment = document.getElementById('payment').value;
@@ -145,71 +145,70 @@ function validate () {
     validatePayment(submittedPayment);
 }
 
-    // Is the name blank?
-    function validateName (string){
-      if (string.length < 1){
+// Is the name blank?
+function validateName(string) {
+    if (string.length < 1) {
         alert('Name field is blank. ' + string.length + ' characters were entered')
-      } else {
-          return true;
-      }
+    } else {
+        return true;
     }
- 
-    // Is the email in the valid format?
-    function validateEmail (string){
-      let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      if (string.length < 1) {
-        alert(' Email field is blank. ' + string.length + ' characters were entered')
-        } else if (regex.test(string)){
-            return true;
-        } else{
-            alert('Make sure your email address is properly formatted!');
-        }
-    }
-    // Has at least one checkbox been checked?
+}
 
-    function validateActivities () {
+// Is the email in the valid format?
+function validateEmail(string) {
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (string.length < 1) {
+        alert(' Email field is blank. ' + string.length + ' characters were entered')
+    } else if (regex.test(string)) {
+        return true;
+    } else {
+        alert('Make sure your email address is properly formatted!');
+    }
+}
+// Has at least one checkbox been checked?
+
+function validateActivities() {
     let boxesSelected = 0;
     for (i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked === true){
-            boxesSelected ++;
-            }
-        } 
-        if (boxesSelected > 0){
-          return true;
-        } else {
-            alert('No boxes were selected');
-    }
-
-    }
-   // Has credit card been selected?
-    function validatePayment (string) {
-        let submittedCc =  document.getElementById('cc-num').value;
-        let submittedZip = document.getElementById('zip').value;
-        let submittedCvv = document.getElementById('cvv').value;
-        if (string === 'credit card'){
-            if (submittedCc.length > 0 && submittedCc.length > 12 && submittedCc.length < 16){ 
-                console.log('Submitted cc # is valid');
-            } else {
-                console.log('Error with cc #');
-            }
-            if (submittedZip.length > 0 && submittedZip.length === 5){
-                console.log('Submitted zipcode is valid');
-            } else {
-                console.log('Error with zip code');
-            }
-            if (submittedCvv.length > 0 && submittedCvv.length === 3){
-                console.log('Submitted CVV is valid');
-            } else {
-                console.log('Error with CVV');
-                returnToPreviousPage();
-            }
-
-        } else {
-            alert('virtual payment selected');
+        if (checkboxes[i].checked === true) {
+            boxesSelected++;
         }
     }
- 
-    
+    if (boxesSelected > 0) {
+        return true;
+    } else {
+        alert('No boxes were selected');
+    }
+
+}
+function validatePayment(string) {
+    let submittedCc = document.getElementById('cc-num').value;
+    let submittedZip = document.getElementById('zip').value;
+    let submittedCvv = document.getElementById('cvv').value;
+    if (string === 'credit card') {
+        if (submittedCc.length > 0 && submittedCc.length > 12 && submittedCc.length < 16) {
+            console.log('Submitted cc # is valid');
+        } else {
+            console.log('Error with cc #');
+        }
+        if (submittedZip.length > 0 && submittedZip.length === 5) {
+            console.log('Submitted zipcode is valid');
+        } else {
+            console.log('Error with zip code');
+        }
+        if (submittedCvv.length > 0 && submittedCvv.length === 3) {
+            console.log('Submitted CVV is valid');
+        } else {
+            console.log('Error with CVV');
+            returnToPreviousPage();
+        }
+
+    } else {
+        return true;
+    }
+}
+
+
 
 
 
