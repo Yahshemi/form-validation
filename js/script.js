@@ -152,21 +152,32 @@ function validate() {
     let submittedName = document.getElementById('name').value; // user submitted text for name field
     let submittedEmail = document.getElementById('mail').value; // user submitted text for email field
     let submittedPayment = document.getElementById('payment').value; // user submitted value for payment selection field
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let boxesSelected = 0;
+
+    for (i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked === true) {
+            boxesSelected++;
+        }
+    }
 
     if (submittedName.length < 1) { // Check if the name field is blank
-        alert('Validation failed');
+        alert('Name validation failed');
+        return false;
+    } else if (!regex.test(submittedEmail)) {
+        alert('Email validation failed');
+        return false;
+    } else if (boxesSelected < 1) {
+        alert('Checkbox validation failed');
         return false;
     } else {
-        alert('Good');
+        alert('Validation passed');
         return true;
     }
 
 
 
-    /* validateName(submittedName);
-     validateEmail(submittedEmail);
-     validateActivities();
-     validatePayment(submittedPayment);*/
+
 }
 
 /*// Is the name blank?
@@ -178,33 +189,7 @@ function validateName(string) {
     }
 }
 
-// Is the email in the valid format?
-function validateEmail(string) {
-    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (string.length < 1) {
-        alert(' Email field is blank. ' + string.length + ' characters were entered')
-    } else if (regex.test(string)) {
-        return true;
-    } else {
-        alert('Make sure your email address is properly formatted!');
-    }
-}
-// Has at least one checkbox been checked?
 
-function validateActivities() {
-    let boxesSelected = 0;
-    for (i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked === true) {
-            boxesSelected++;
-        }
-    }
-    if (boxesSelected > 0) {
-        return true;
-    } else {
-        alert('No boxes were selected');
-    }
-
-}
 
 function validatePayment(string) {
     let submittedCc = document.getElementById('cc-num').value;
