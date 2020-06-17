@@ -154,6 +154,9 @@ function validate() {
     let submittedPayment = document.getElementById('payment').value; // user submitted value for payment selection field
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let boxesSelected = 0;
+    let submittedCc = document.getElementById('cc-num').value;
+    let submittedZip = document.getElementById('zip').value;
+    let submittedCvv = document.getElementById('cvv').value;
 
     for (i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked === true) {
@@ -170,6 +173,18 @@ function validate() {
     } else if (boxesSelected < 1) {
         alert('Checkbox validation failed');
         return false;
+    } else if (submittedPayment === 'credit card') {
+        if (!submittedCc.length > 0 && submittedCc.length > 12 && submittedCc.length < 16) {
+            return false;
+        } else if (!submittedZip.length > 0 && submittedZip.length === 5) {
+            return false;
+        } else if (submittedCvv.length > 0 && submittedCvv.length === 3) {
+            return false;
+        } else {
+            alert('All credit card fields are good!')
+            return true;
+        }
+
     } else {
         alert('Validation passed');
         return true;
@@ -180,35 +195,6 @@ function validate() {
 
 }
 
-/*// Is the name blank?
-function validateName(string) {
-    if (string.length < 1) {
-        alert('Name field is blank. ' + string.length + ' characters were entered')
-    } else {
-        return true;
-    }
-}
-
-
-
-function validatePayment(string) {
-    let submittedCc = document.getElementById('cc-num').value;
-    let submittedZip = document.getElementById('zip').value;
-    let submittedCvv = document.getElementById('cvv').value;
-    if (string === 'credit card') {
-        if (submittedCc.length > 0 && submittedCc.length > 12 && submittedCc.length < 16) {
-            return true;
-        }
-        if (submittedZip.length > 0 && submittedZip.length === 5) {
-            return true;
-        }
-        if (submittedCvv.length > 0 && submittedCvv.length === 3) {
-            return true;
-        }
-        returnToPreviousPage();
-    }
-    return true;
-}
 
 /**********************************************************
  Regression Tests for Grading
@@ -225,8 +211,8 @@ function validatePayment(string) {
 // True — Payment option in the select menu matches the payment option displayed on the page.
 // True — When a user chooses a payment option, the chosen payment section is revealed and the other payment sections are hidden.
 // True — Form cannot be submitted if name is blank.
-//      — Form cannot be submitted if email field isn't formatted correctly.
-//      — Form cannot be submitted if no activities are selected.
+// True — Form cannot be submitted if email field isn't formatted correctly.
+// True — Form cannot be submitted if no activities are selected.
 //      — Form cannot be submitted if credit card is selected and CC# isn't 13-16 digits.
 //      — Form cannot be submitted if credit card is selected and zipcode isn't 5 digits.
 //      — Form cannot be submitted if credit card is selected and CVV isn't 3 digits.
