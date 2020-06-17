@@ -57,17 +57,23 @@ let design = document.getElementById('design');
 let color = document.getElementById('color');
 let colorDiv = document.getElementById('colors-js-puns');
 let colorOptions = colorDiv.querySelectorAll('option');
+let addOption = document.createElement('option');
+let colorSelect = colorDiv.querySelector('select');
+colorSelect.prepend(addOption);
+addOption.text = 'Please select a T-shirt theme';
+addOption.value = 'default';
+colorSelect.value = 'default';
 hide(colorDiv);
 
 design.addEventListener('change', e => { // Listen for change in drop down value and act accordingly
     if (design.value === 'heart js') {
         show(colorDiv);
-        color.value = 'none'; // Default visible value should be blank
+        color.value = 'default'; // Default visible value should be blank
         hide(colorOptions[0], colorOptions[1], colorOptions[2]);
         show(colorOptions[3], colorOptions[4], colorOptions[5]);
     } else if (design.value === 'js puns') {
         show(colorDiv);
-        color.value = 'none'; // Default visible value should be blank
+        color.value = 'default'; // Default visible value should be blank
         hide(colorOptions[3], colorOptions[4], colorOptions[5]);
         show(colorOptions[0], colorOptions[1], colorOptions[2]);
     } else {
@@ -225,7 +231,7 @@ function validatePayment(string) {
 
 // True — Focus on the first field
 // True — "Your job role" text field appears when user selects "Other" from the Job Role menu.
-//      — Until a theme is selected from the “Design” menu, no color options appear in the “Color” drop down and the “Color” field reads “Please select a T-shirt theme”.
+// True — Until a theme is selected from the “Design” menu, no color options appear in the “Color” drop down and the “Color” field reads “Please select a T-shirt theme”.
 // True — When a new theme is selected from the "Design" menu, the "Color" field and drop down menu is updated.
 // True — “Color” drop down menu is hidden until a T-Shirt design is selected.
 // True — User cannot select two activities that are at the same time.
