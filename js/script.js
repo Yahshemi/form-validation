@@ -13,10 +13,10 @@ Goal: Exceeds Expecatations
 let fieldset = document.querySelectorAll('fieldset');
 let newField = document.createElement('input');
 let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
+let userName = document.getElementById('name');
 
 // Onload events
 window.addEventListener("load", e => {
-    let userName = document.getElementById('name');
     userName.focus();
     for (let i = 0; i < checkboxes.length; i++) { // Reset checkbox selection
         checkboxes[i].checked = false;
@@ -30,14 +30,16 @@ let hide = function() {
     }
 }
 let show = function() {
-        for (let i = 0; i < arguments.length; i++) {
-            arguments[i].hidden = false;
-        }
+    for (let i = 0; i < arguments.length; i++) {
+        arguments[i].hidden = false;
     }
-    /**********************************************************
-    Basic Info
-    *********************************************************/
-    // Show and hide a text area based on selection of 'user-title'
+}
+
+
+/**********************************************************
+Basic Info
+*********************************************************/
+// Show and hide a text area based on selection of 'user-title'
 let title = document.getElementById('title');
 
 newField.setAttribute('type', 'text');
@@ -149,51 +151,51 @@ let form = document.querySelector('form');
 form.addEventListener("submit", validate);
 
 function validate() {
-    let submittedName = document.getElementById('name').value; // user submitted text for name field
-    let submittedEmail = document.getElementById('mail').value; // user submitted text for email field
-    let submittedPayment = document.getElementById('payment').value; // user submitted value for payment selection field
-    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    let boxesSelected = 0;
-    let submittedCc = document.getElementById('cc-num').value;
-    let submittedZip = document.getElementById('zip').value;
-    let submittedCvv = document.getElementById('cvv').value;
+    let allowSubmit = false;
+    if (!allowSubmit) {
+        event.preventDefault();
+    });
+let submittedName = document.getElementById('name').value; // user submitted text for name field
+let submittedEmail = document.getElementById('mail').value; // user submitted text for email field
+let submittedPayment = document.getElementById('payment').value; // user submitted value for payment selection field
+let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+let boxesSelected = 0;
+let submittedCc = document.getElementById('cc-num').value;
+let submittedZip = document.getElementById('zip').value;
+let submittedCvv = document.getElementById('cvv').value;
 
-    for (i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked === true) {
-            boxesSelected++;
-        }
+for (i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked === true) {
+        boxesSelected++;
     }
-
-    if (submittedName.length < 1) { // Check if the name field is blank
-        alert('Name validation failed');
-        return false;
-    } else if (!regex.test(submittedEmail)) {
-        alert('Email validation failed');
-        return false;
-    } else if (boxesSelected < 1) {
-        alert('Checkbox validation failed');
-        return false;
-    } else if (submittedPayment === 'credit card') {
-        if (!submittedCc.length > 0 && submittedCc.length > 12 && submittedCc.length < 16) {
-            return false;
-        } else if (!submittedZip.length > 0 && submittedZip.length === 5) {
-            return false;
-        } else if (submittedCvv.length > 0 && submittedCvv.length === 3) {
-            return false;
-        } else {
-            alert('All credit card fields are good!')
-            return true;
-        }
-
-    } else {
-        alert('Validation passed');
-        return true;
-    }
-
-
-
-
 }
+
+if (submittedName.length < 1) { // Blank = false
+    userName.style.borderColor = 'red';
+    return false;
+}
+
+if (!regex.test(submittedEmail)) { // Incorrect formatting = false
+    return false;
+}
+
+if (boxesSelected < 1) { // If no boxes are selected = false
+    return false;
+}
+
+if (submittedPayment !== 'credit card') {
+    return false;
+}
+
+alert('Validation passed');
+allowSubmit = true;
+return true;
+}
+
+
+
+
+
 
 
 /**********************************************************
