@@ -151,46 +151,52 @@ let form = document.querySelector('form');
 form.addEventListener("submit", validate);
 
 function validate() {
-    let allowSubmit = false;
-    if (!allowSubmit) {
-        event.preventDefault();
-    });
-let submittedName = document.getElementById('name').value; // user submitted text for name field
-let submittedEmail = document.getElementById('mail').value; // user submitted text for email field
-let submittedPayment = document.getElementById('payment').value; // user submitted value for payment selection field
-let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-let boxesSelected = 0;
-let submittedCc = document.getElementById('cc-num').value;
-let submittedZip = document.getElementById('zip').value;
-let submittedCvv = document.getElementById('cvv').value;
 
-for (i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i].checked === true) {
-        boxesSelected++;
+    let submittedName = document.getElementById('name').value; // user submitted text for name field
+    let userEmail = document.getElementById('mail');
+    let submittedEmail = userEmail.value; // user submitted text for email field
+    let submittedPayment = document.getElementById('payment').value; // user submitted value for payment selection field
+    let userCvv = document.getElementById('cvv');
+    let submittedCvv = userCvv.value;
+    let userZip = document.getElementById('zip');
+    let submittedZip = userZip.value;
+    let userCc = document.getElementById('cc-num');
+    let submittedCc = userCc.value;
+
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let boxesSelected = 0;
+
+
+    for (i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked === true) {
+            boxesSelected++;
+        }
     }
+
+    if (submittedName.length < 1) { // Check for a blank name field
+        userName.style.borderColor = 'red';
+    }
+
+    if (!regex.test(submittedEmail)) { // Check for properly formatted email address
+        userEmail.style.borderColor = 'red';
+    }
+
+    if (boxesSelected < 1) { // Check to make sure at least one activity is selected
+        console.log('Must select at least one activity');
+    }
+
+    if (submittedPayment === 'credit card' && (!submittedCc > 11 || submittedCc < 16) && (submittedCvv.length !== 3 || submittedZip.length !== 5)) {
+        userCvv.style.borderColor = 'red';
+        userZip.style.borderColor = 'red';
+        event.preventDefault();
+
+    }
+
+
+
 }
 
-if (submittedName.length < 1) { // Blank = false
-    userName.style.borderColor = 'red';
-    return false;
-}
 
-if (!regex.test(submittedEmail)) { // Incorrect formatting = false
-    return false;
-}
-
-if (boxesSelected < 1) { // If no boxes are selected = false
-    return false;
-}
-
-if (submittedPayment !== 'credit card') {
-    return false;
-}
-
-alert('Validation passed');
-allowSubmit = true;
-return true;
-}
 
 
 
