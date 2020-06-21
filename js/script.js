@@ -176,7 +176,7 @@ function validate() {
     if (submittedName.length < 1) { // Check for a blank name field
         userName.style.borderColor = 'red';
     }
-
+    
     if (!regex.test(submittedEmail)) { // Check for properly formatted email address
         userEmail.style.borderColor = 'red';
     }
@@ -185,15 +185,22 @@ function validate() {
         console.log('Must select at least one activity');
     }
 
-    if (submittedPayment === 'credit card' && (!submittedCc > 11 || submittedCc < 16) && (submittedCvv.length !== 3 || submittedZip.length !== 5)) {
-        userCvv.style.borderColor = 'red';
-        userZip.style.borderColor = 'red';
-        event.preventDefault();
-
+    if (!(submittedCc > 11 && submittedCc < 16)) {
+        userCc.style.borderColor = 'red';
+        
     }
 
+    if (submittedZip !== 5){
+        userZip.style.borderColor = 'red';
+    }
 
+    if (submittedCvv !== 3){
+        userCvv.style.borderColor = 'red';
+        return false;
+    }
 
+    return true;
+  
 }
 
 
