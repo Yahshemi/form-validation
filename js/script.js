@@ -150,22 +150,19 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
 let form = document.querySelector('form');
 form.addEventListener("submit", validate);
 
-function validate() {
+function validate(form) {
 
     let submittedName = document.getElementById('name').value; // user submitted text for name field
     let userEmail = document.getElementById('mail');
     let submittedEmail = userEmail.value; // user submitted text for email field
-    let submittedPayment = document.getElementById('payment').value; // user submitted value for payment selection field
     let userCvv = document.getElementById('cvv');
     let submittedCvv = userCvv.value;
     let userZip = document.getElementById('zip');
     let submittedZip = userZip.value;
     let userCc = document.getElementById('cc-num');
     let submittedCc = userCc.value;
-
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let boxesSelected = 0;
-
 
     for (i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked === true) {
@@ -173,34 +170,38 @@ function validate() {
         }
     }
 
-    if (submittedName.length < 1) { // Check for a blank name field
-        userName.style.borderColor = 'red';
+    if (!(submittedName.length > 1)) {
+        alert('Error: Name');
+        return false;
     }
-    
-    if (!regex.test(submittedEmail)) { // Check for properly formatted email address
-        userEmail.style.borderColor = 'red';
-    }
-
-    if (boxesSelected < 1) { // Check to make sure at least one activity is selected
-        console.log('Must select at least one activity');
+    if (!(regex.test(submittedEmail))) {
+        alert ('Error: Email');
+        return false;
     }
 
-    if (!(submittedCc > 11 && submittedCc < 16)) {
-        userCc.style.borderColor = 'red';
+    if (!(boxesSelected > 0)) {
+        alert ('Error: Activities');
         
+        return false;
     }
 
-    if (submittedZip !== 5){
-        userZip.style.borderColor = 'red';
+    if (!(submittedCc.length > 13 && submittedCc.length < 16)) {
+        alert ('Error: Card Number');
+        return false;
     }
 
-    if (submittedCvv !== 3){
-        userCvv.style.borderColor = 'red';
+    if (!(submittedZip.length === 5)) {
+        alert ('Error: Zipcode');
+        return false;
+    }
+
+    if (!(submittedCvv.length === 3)) {
+        alert ('Error: CVV');
         return false;
     }
 
     return true;
-  
+
 }
 
 
@@ -228,8 +229,8 @@ function validate() {
 // True — Form cannot be submitted if name is blank.
 // True — Form cannot be submitted if email field isn't formatted correctly.
 // True — Form cannot be submitted if no activities are selected.
-//      — Form cannot be submitted if credit card is selected and CC# isn't 13-16 digits.
-//      — Form cannot be submitted if credit card is selected and zipcode isn't 5 digits.
-//      — Form cannot be submitted if credit card is selected and CVV isn't 3 digits.
+// True — Form cannot be submitted if credit card is selected and CC# isn't 13-16 digits.
+// True — Form cannot be submitted if credit card is selected and zipcode isn't 5 digits.
+// True — Form cannot be submitted if credit card is selected and CVV isn't 3 digits.
 //      — At least one field does real time data validation.
 //      — Without JavaScript all form fields and payment information is displayed.
