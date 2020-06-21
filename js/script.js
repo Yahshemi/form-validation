@@ -184,22 +184,26 @@ function validate(form) {
         
         return false;
     }
-
-    if (!(submittedCc.length > 13 && submittedCc.length < 16)) {
-        alert ('Error: Card Number');
-        return false;
+   
+    if (paymentMethod.value !== 'credit card'){
+       console.log('do nothing');
+    } else {
+        if (!(submittedCc.length > 13 && submittedCc.length < 16)) {
+            alert ('Error: Card Number');
+            return false;
+        }
+    
+        if (!(submittedZip.length === 5)) {
+            alert ('Error: Zipcode');
+            return false;
+        }
+    
+        if (!(submittedCvv.length === 3)) {
+            alert ('Error: CVV');
+            return false;
+        }
     }
-
-    if (!(submittedZip.length === 5)) {
-        alert ('Error: Zipcode');
-        return false;
-    }
-
-    if (!(submittedCvv.length === 3)) {
-        alert ('Error: CVV');
-        return false;
-    }
-
+    alert('success');
     return true;
 
 }
