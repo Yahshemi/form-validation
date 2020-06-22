@@ -10,14 +10,15 @@ Goal: Exceeds Expecatations
  *********************************************************/
 
 // Global variables
-let fieldset = document.querySelectorAll('fieldset');
-let newField = document.createElement('input');
 let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
-let userName = document.getElementById('name');
+let fieldset = document.querySelectorAll('fieldset');
+let form = document.querySelector('form'); 
+let name = document.getElementById('name');
+let newField = document.createElement('input');
 
 // Onload events
 window.addEventListener("load", e => {
-    userName.focus();
+    name.focus();
     for (let i = 0; i < checkboxes.length; i++) { // Reset checkbox selection
         checkboxes[i].checked = false;
     }
@@ -147,27 +148,17 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
  Validation
  *********************************************************/
 
-let form = document.querySelector('form'); 
 form.addEventListener("submit", validate);
 
 function validate(form) {
 
-    let submittedName = userName.value; // user submitted text for name field
-
-    let userEmail = document.getElementById('mail');
-    let submittedEmail = userEmail.value; // user submitted text for email field
-
-    let userCvv = document.getElementById('cvv');
-    let submittedCvv = userCvv.value;
-
-    let userZip = document.getElementById('zip');
-    let submittedZip = userZip.value;
-
-    let userCc = document.getElementById('cc-num');
-    let submittedCc = userCc.value;
-    
+    let email = document.getElementById('mail');
+    let cc = document.getElementById('cc-num');
+    let zip = document.getElementById('zip');
+    let cvv = document.getElementById('cvv');
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let boxesSelected = 0;
+  
 
     for (i = 0; i < checkboxes.length; i++) { // Count the number of checkboxes the user has checked
         if (checkboxes[i].checked === true) {
@@ -175,11 +166,11 @@ function validate(form) {
         }
     }
 
-    if (!(submittedName.length > 1)) { // Name field cannot be blank
+    if (!(name.value.length > 1)) { // Name field cannot be blank
         alert('Error: Name');
         return false;
     }
-    if (!(regex.test(submittedEmail))) { // Email must be correctly formatted
+    if (!(regex.test(email.value))) { // Email must be correctly formatted
         alert ('Error: Email');
         return false;
     }
@@ -193,17 +184,17 @@ function validate(form) {
     if (paymentMethod.value !== 'credit card'){ // If credit card is selected, perform some additional validation
        console.log('do nothing');
     } else {
-        if (!(submittedCc.length > 13 && submittedCc.length < 16)) {
+        if (!(cc.value.length > 13 && cc.value.length < 16)) {
             alert ('Error: Card Number'); 
             return false;
         }
     
-        if (!(submittedZip.length === 5)) {
+        if (!(zip.value.length === 5)) {
             alert ('Error: Zipcode');
             return false;
         }
     
-        if (!(submittedCvv.length === 3)) {
+        if (!(cvv.value.length === 3)) {
             alert ('Error: CVV');
             return false;
         }
