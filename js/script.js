@@ -19,10 +19,7 @@ let newField = document.createElement('input');
 // Onload events
 window.addEventListener("load", e => {
     name.focus();
-    for (let i = 0; i < checkboxes.length; i++) { // Reset checkbox selection
-        checkboxes[i].checked = false;
-    }
-});
+ });
 
 // Helper functions
 let hide = function() {
@@ -41,10 +38,10 @@ let show = function() {
 Basic Info
 *********************************************************/
 // Show and hide a text area based on selection of 'user-title'
-let title = document.getElementById('title');
 
+let title = document.getElementById('title');
 newField.setAttribute('type', 'text');
-hide(newField);
+hide(newField); 
 title.parentNode.appendChild(newField);
 
 title.addEventListener('change', e => {
@@ -53,6 +50,7 @@ title.addEventListener('change', e => {
     } else
         hide(newField);
 });
+
 /**********************************************************
 T-shirt Info
  ********************************************************/
@@ -68,15 +66,15 @@ addOption.value = 'default';
 colorSelect.value = 'default';
 hide(colorDiv);
 
-design.addEventListener('change', e => { // Listen for change in drop down value and act accordingly
+design.addEventListener('change', e => { 
     if (design.value === 'heart js') {
         show(colorDiv);
-        color.value = 'default'; // Default visible value should be blank
+        color.value = 'default'; 
         hide(colorOptions[0], colorOptions[1], colorOptions[2]);
         show(colorOptions[3], colorOptions[4], colorOptions[5]);
     } else if (design.value === 'js puns') {
         show(colorDiv);
-        color.value = 'default'; // Default visible value should be blank
+        color.value = 'default'; 
         hide(colorOptions[3], colorOptions[4], colorOptions[5]);
         show(colorOptions[0], colorOptions[1], colorOptions[2]);
     } else {
@@ -151,21 +149,17 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
 form.addEventListener("submit", validate);
 
 function validate(form) {
-
     let email = document.getElementById('mail');
     let cc = document.getElementById('cc-num');
     let zip = document.getElementById('zip');
     let cvv = document.getElementById('cvv');
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let boxesSelected = 0;
-  
-
     for (i = 0; i < checkboxes.length; i++) { // Count the number of checkboxes the user has checked
         if (checkboxes[i].checked === true) {
             boxesSelected++;
         }
     }
-
     if (!(name.value.length > 1)) { // Name field cannot be blank
         alert('Error: Name');
         return false;
@@ -174,13 +168,10 @@ function validate(form) {
         alert ('Error: Email');
         return false;
     }
-
     if (!(boxesSelected > 0)) { // User cannot submit a form with no activities selected
         alert ('Error: Activities');
-        
         return false;
     }
-   
     if (paymentMethod.value !== 'credit card'){ // If credit card is selected, perform some additional validation
        console.log('do nothing');
     } else {
@@ -188,12 +179,10 @@ function validate(form) {
             alert ('Error: Card Number'); 
             return false;
         }
-    
         if (!(zip.value.length === 5)) {
             alert ('Error: Zipcode');
             return false;
         }
-    
         if (!(cvv.value.length === 3)) {
             alert ('Error: CVV');
             return false;
@@ -203,15 +192,6 @@ function validate(form) {
     return true;
 
 }
-
-
-
-
-
-
-
-
-
 /**********************************************************
  Regression Tests for Grading
  *********************************************************/
