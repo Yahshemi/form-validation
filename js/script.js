@@ -147,49 +147,54 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
  Validation
  *********************************************************/
 
-let form = document.querySelector('form');
+let form = document.querySelector('form'); 
 form.addEventListener("submit", validate);
 
 function validate(form) {
 
-    let submittedName = document.getElementById('name').value; // user submitted text for name field
+    let submittedName = userName.value; // user submitted text for name field
+
     let userEmail = document.getElementById('mail');
     let submittedEmail = userEmail.value; // user submitted text for email field
+
     let userCvv = document.getElementById('cvv');
     let submittedCvv = userCvv.value;
+
     let userZip = document.getElementById('zip');
     let submittedZip = userZip.value;
+
     let userCc = document.getElementById('cc-num');
     let submittedCc = userCc.value;
+    
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let boxesSelected = 0;
 
-    for (i = 0; i < checkboxes.length; i++) {
+    for (i = 0; i < checkboxes.length; i++) { // Count the number of checkboxes the user has checked
         if (checkboxes[i].checked === true) {
             boxesSelected++;
         }
     }
 
-    if (!(submittedName.length > 1)) {
+    if (!(submittedName.length > 1)) { // Name field cannot be blank
         alert('Error: Name');
         return false;
     }
-    if (!(regex.test(submittedEmail))) {
+    if (!(regex.test(submittedEmail))) { // Email must be correctly formatted
         alert ('Error: Email');
         return false;
     }
 
-    if (!(boxesSelected > 0)) {
+    if (!(boxesSelected > 0)) { // User cannot submit a form with no activities selected
         alert ('Error: Activities');
         
         return false;
     }
    
-    if (paymentMethod.value !== 'credit card'){
+    if (paymentMethod.value !== 'credit card'){ // If credit card is selected, perform some additional validation
        console.log('do nothing');
     } else {
         if (!(submittedCc.length > 13 && submittedCc.length < 16)) {
-            alert ('Error: Card Number');
+            alert ('Error: Card Number'); 
             return false;
         }
     
