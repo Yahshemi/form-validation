@@ -40,6 +40,9 @@ Basic Info
 // Show and hide a text area based on selection of 'user-title'
 
 let title = document.getElementById('title');
+let titleOptions = title.querySelectorAll('option');
+let addTitle = document.createElement('option');
+
 newField.setAttribute('type', 'text');
 hide(newField); 
 title.parentNode.appendChild(newField);
@@ -146,14 +149,28 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
  Validation
  *********************************************************/
 
-form.addEventListener("submit", validate);
+title.addEventListener('change', realValidation);
 
+form.addEventListener("submit", validate);
+let email = document.getElementById('mail');
+
+function realValidation() {
+   if (!(name.value.length > 0)) {
+       name.focus();
+       alert('Name cannot be blank');
+   } 
+   
+   if (!(email.value.length > 1)) {
+       email.focus();
+       alert('Email cannot be blank');
+   }
+}
 function validate(form) {
-    let email = document.getElementById('mail');
+
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let cc = document.getElementById('cc-num');
     let zip = document.getElementById('zip');
     let cvv = document.getElementById('cvv');
-    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let boxesSelected = 0;
     for (i = 0; i < checkboxes.length; i++) { // Count the number of checkboxes the user has checked
         if (checkboxes[i].checked === true) {
@@ -212,5 +229,5 @@ function validate(form) {
 // True — Form cannot be submitted if credit card is selected and CC# isn't 13-16 digits.
 // True — Form cannot be submitted if credit card is selected and zipcode isn't 5 digits.
 // True — Form cannot be submitted if credit card is selected and CVV isn't 3 digits.
-//      — At least one field does real time data validation.
+// True — At least one field does real time data validation.
 //      — Without JavaScript all form fields and payment information is displayed.
