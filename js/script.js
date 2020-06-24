@@ -149,22 +149,11 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
  Validation
  *********************************************************/
 
-title.addEventListener('change', realValidation);
 
 form.addEventListener("submit", validate);
 let email = document.getElementById('mail');
 
-function realValidation() {
-   if (!(name.value.length > 0)) {
-       name.focus();
-       alert('Name cannot be blank');
-   } 
-   
-   if (!(email.value.length > 1)) {
-       email.focus();
-       alert('Email cannot be blank');
-   }
-}
+
 function validate(form) {
 
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -172,21 +161,34 @@ function validate(form) {
     let zip = document.getElementById('zip');
     let cvv = document.getElementById('cvv');
     let boxesSelected = 0;
+    let p = document.createAttribute('placeholder');
+
+    
+
+
     for (i = 0; i < checkboxes.length; i++) { // Count the number of checkboxes the user has checked
         if (checkboxes[i].checked === true) {
             boxesSelected++;
         }
     }
     if (!(name.value.length > 1)) { // Name field cannot be blank
-        alert('Error: Name');
-        return false;
+        event.preventDefault();
+        name.setAttributeNode(p);
+        p.value = 'Name cannot be blank';
+        name.style.borderColor = 'red';
+        
+        
     }
     if (!(regex.test(email.value))) { // Email must be correctly formatted
-        alert ('Error: Email');
+        event.preventDefault();
+        email.setAttributeNode(p);
+        p.value = 'Email must be correctly formatted (example@example.com)'
+        email.focus();
         return false;
     }
     if (!(boxesSelected > 0)) { // User cannot submit a form with no activities selected
-        alert ('Error: Activities');
+        event.preventDefault();
+
         return false;
     }
     if (paymentMethod.value !== 'credit card'){ // If credit card is selected, perform some additional validation
