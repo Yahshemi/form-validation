@@ -5,6 +5,7 @@ Intended Behavior: Interactive Form
 Goal: Exceeds Expecatations
 ******************************************/
 
+
 /**********************************************************
     Setup
  *********************************************************/
@@ -13,13 +14,9 @@ Goal: Exceeds Expecatations
 let div = document.createElement('div'); // Create a new div and add it below the list of checkbox inputs
 let fieldset = document.querySelectorAll('fieldset');
 let form = document.querySelector('form'); 
-let name = document.getElementById('name');
 let newField = document.createElement('input');
-
-// Onload events
-window.addEventListener("load", e => {
-    name.focus();
- });
+let name = document.getElementById('name');
+name.focus();
 
 // Helper functions
 let hide = function() {
@@ -148,15 +145,11 @@ payment.addEventListener('change', e => { // Listen for a change in the selectio
 /**********************************************************
  Validation
  *********************************************************/
-
-
 form.addEventListener("submit", validate);
-let email = document.getElementById('mail');
-
-
 function validate(form) {
 
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let email = document.getElementById('mail');
     let cc = document.getElementById('cc-num');
     let zip = document.getElementById('zip');
     let cvv = document.getElementById('cvv');
@@ -174,36 +167,42 @@ function validate(form) {
     if (!(name.value.length > 1)) { // Name field cannot be blank
         event.preventDefault();
         name.setAttributeNode(p);
-        p.value = 'Name cannot be blank';
+        p.value = 'Enter a valid name';
         name.style.borderColor = 'red';
-        
-        
+        return false;
+
     }
     if (!(regex.test(email.value))) { // Email must be correctly formatted
         event.preventDefault();
         email.setAttributeNode(p);
-        p.value = 'Email must be correctly formatted (example@example.com)'
-        email.focus();
+        p.value = 'example@example.com'
+        email.style.borderColor = 'red';
         return false;
     }
     if (!(boxesSelected > 0)) { // User cannot submit a form with no activities selected
         event.preventDefault();
-
         return false;
     }
     if (paymentMethod.value !== 'credit card'){ // If credit card is selected, perform some additional validation
        console.log('do nothing');
     } else {
         if (!(cc.value.length > 13 && cc.value.length < 16)) {
-            alert ('Error: Card Number'); 
+            event.preventDefault();
+            cc.setAttributeNode(p);
+            p.value='Enter a valid card number'
+            cc.style.borderColor = 'red';
             return false;
         }
         if (!(zip.value.length === 5)) {
-            alert ('Error: Zipcode');
+            event.preventDefault();
+            zip.setAttributeNode(p);
+            p.value = 'Invalid Zipcode'
             return false;
         }
         if (!(cvv.value.length === 3)) {
-            alert ('Error: CVV');
+            event.preventDefault();
+            cvv.setAttributeNode(p);
+            p.value = 'Invalid CVV'
             return false;
         }
     }
@@ -231,5 +230,5 @@ function validate(form) {
 // True — Form cannot be submitted if credit card is selected and CC# isn't 13-16 digits.
 // True — Form cannot be submitted if credit card is selected and zipcode isn't 5 digits.
 // True — Form cannot be submitted if credit card is selected and CVV isn't 3 digits.
-// True — At least one field does real time data validation.
+//      — At least one field does real time data validation.
 //      — Without JavaScript all form fields and payment information is displayed.
