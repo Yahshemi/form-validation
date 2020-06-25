@@ -181,6 +181,10 @@ function validate(form) {
     }
     if (!(boxesSelected > 0)) { // User cannot submit a form with no activities selected
         event.preventDefault();
+        let label = activities.children[1];
+        activities.insertBefore(div,label);
+        div.textContent = '(Select at least 1 activity)';
+        div.style.color = 'red';
         return false;
     }
     if (paymentMethod.value !== 'credit card'){ // If credit card is selected, perform some additional validation
