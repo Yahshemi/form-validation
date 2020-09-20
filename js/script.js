@@ -12,7 +12,7 @@ SETUP
 let div = document.createElement('div'); // used to create a new div element
 let opt = document.createElement('option'); // used to create a new select option
 let actError = document.createElement('div');
-
+let mailError = document.createElement('div');
 // Selectors
 let form = document.querySelector('form');
 let fieldset = document.querySelectorAll('fieldset');
@@ -170,9 +170,13 @@ let validName = () => { // Name cannot be blank
 let validEmail = () => { // Email must be valid syntax (name@name.com)
     let value = mail.value;
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (value == null || value == "" || !regex.test(value)) {
+    if (value == null || value == "") {
         mail.className = "field-error";
         return false;
+    } else if (!regex.test(value)) {
+        mailError.className = "error-text";
+        mailError.innerHTML = "Please use example@example.com formatting";
+        mail.previousElementSibling.append(mailError);
     } else {
         mail.removeAttribute('class');
         return true;
@@ -187,8 +191,8 @@ let validActivities = () => { // At least 1 activity must be selected
         }
     }
     if (boxesSelected == 0) {
-        actError.className = "error-text"
-        actError.innerHTML = "Please select at least 1 activity"
+        actError.className = "error-text";
+        actError.innerHTML = "Please select at least 1 activity";
         activities.prepend(actError);
 
         return false;
