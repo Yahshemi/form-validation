@@ -16,6 +16,12 @@ This project utilizes utilizes vanilla HTML, CSS, and JavaScript to present the 
 ## Running the Project
 To see the project in action, clone this repository to your desktop and open index.html in a browser. 
 
+## Exceeds Requirements Met
+- Color dropdown is hidden unless a t-shirt design is selected
+- Name, email, credit card number, zipcode, and cvv have realtime validation
+- Email field error is different for blank vs. formatting regex requirement met
+
+
 ## Credits
 
 - Inspired by [Team Treehouse](https://teamtreehouse.com/)
