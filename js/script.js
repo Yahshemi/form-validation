@@ -213,7 +213,9 @@ let validActivities = () => { // At least 1 activity must be selected
 let validNum = () => { // Credit card number must be between 13 and 16 numerical characters 
     numError.className = "error-text";
     ccNum.previousElementSibling.append(numError);
-    if (isNaN(ccNum.value) || ccNum.value == "") {
+    if (payment.value !== "credit card") {
+        return true;
+    } else if (isNaN(ccNum.value) || ccNum.value == "") {
         numError.innerHTML = "Value required";
         return false;
     } else if (ccNum.value.length > 16 || ccNum.value.length < 13) {
@@ -229,7 +231,9 @@ let validNum = () => { // Credit card number must be between 13 and 16 numerical
 let validZip = () => { // Zip code must be exactly 5 numerical characters
     zipError.className = "error-text";
     zip.previousElementSibling.append(zipError);
-    if (isNaN(zip.value) || zip.value == "") {
+    if (payment.value !== "credit card") {
+        return true;
+    } else if (isNaN(zip.value) || zip.value == "") {
         zipError.innerHTML = "Value required";
         return false;
     } else if (zip.value.length !== 5) {
@@ -244,28 +248,35 @@ let validZip = () => { // Zip code must be exactly 5 numerical characters
 let validCVV = () => { // CVV must be exactly 3 numerical characters
     cvvError.className = "error-text";
     cvv.previousElementSibling.append(cvvError);
-    if (isNaN(cvv.value) || cvv.value == "") {
+    if (payment.value !== "credit card") {
+        return true;
+    } else if (isNaN(cvv.value) || cvv.value == "") {
         cvvError.innerHTML = "Value required";
+        console.log(2);
         return false;
     } else if (cvv.value.length !== 3) {
         show(cvvError);
         cvvError.innerHTML = "Should be 3 digits";
+        console.log(3);
         return false;
     } else {
         hide(cvvError)
+        console.log(4);
         return true;
     }
 }
 
+
 /******************************************
 REAL TIME
 ******************************************/
-mail.addEventListener('click', validName);
-title.addEventListener('click', validEmail);
-payment.addEventListener('click', validActivities);
+
 zip.addEventListener('click', validNum);
+zip.addEventListener('focus', validNum);
 cvv.addEventListener('click', validZip);
+cvv.addEventListener('focus', validZip);
 expMonth.addEventListener('click', validCVV);
+expMonth.addEventListener('focus', validCVV);
 /******************************************
 
 ******************************************/
@@ -279,10 +290,8 @@ form.addEventListener('submit', (e) => {
     validZip();
     validCVV();
 
-    if ((!validName() || !validEmail() || !validActivities() || !validNum() || !validZip() || !validCVV()) && payment.value == "credit card") {
+    if ((!validName() || !validEmail() || !validActivities() || !validNum() || !validZip() || !validCVV())) {
         e.preventDefault();
-    } else if (!validName() || !validEmail() || !validActivities()) {
-        e.preventDefault;
     }
 
 
