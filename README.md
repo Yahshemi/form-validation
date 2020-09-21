@@ -10,7 +10,7 @@ This project utilizes utilizes vanilla HTML, CSS, and JavaScript to present the 
 - A user cannot select activities that conflict in date or time
 - The cost of each activity is added to their total at the bottom of the list as they select/unselect items
 - Different payment options are available show/hide based on the selection
-- Name, email, credit card number, zipcode, and cvv are validated when a user moves focus to the next field
+- Credit card number, zipcode, and cvv are validated when a user moves focus to the next field
 - All validated fields are checked and will block submission if the errors persist.
   
 ## Running the Project
@@ -18,8 +18,8 @@ To see the project in action, clone this repository to your desktop and open ind
 
 ## Exceeds Requirements Met
 - Color dropdown is hidden unless a t-shirt design is selected
-- Name, email, credit card number, zipcode, and cvv have realtime validation
-- Email field error is different for blank vs. formatting regex requirement met
+- Credit card number, zipcode, and cvv have realtime validation
+- Email field and credit card field errors are different for blank vs. formatting regex requirement met
 
 
 ## Credits
