@@ -252,16 +252,13 @@ let validCVV = () => { // CVV must be exactly 3 numerical characters
         return true;
     } else if (isNaN(cvv.value) || cvv.value == "") {
         cvvError.innerHTML = "Value required";
-        console.log(2);
         return false;
     } else if (cvv.value.length !== 3) {
         show(cvvError);
         cvvError.innerHTML = "Should be 3 digits";
-        console.log(3);
         return false;
     } else {
         hide(cvvError)
-        console.log(4);
         return true;
     }
 }
