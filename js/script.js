@@ -13,6 +13,10 @@ let div = document.createElement('div'); // used to create a new div element
 let opt = document.createElement('option'); // used to create a new select option
 let actError = document.createElement('div');
 let mailError = document.createElement('div');
+let nameError = document.createElement('div');
+let numError = document.createElement('div');
+let zipError = document.createElement('div')
+let cvvError = document.createElement('div');
 // Selectors
 let form = document.querySelector('form');
 let fieldset = document.querySelectorAll('fieldset');
@@ -50,8 +54,10 @@ let show = function() { // iterates through a set of items and sets them to show
 
 // Page load events
 window.addEventListener("load", e => { // 
+    form.reset();
     name.focus(); // focuses the input on the name field on page load
     hide(other); // hides the text field for other job roles
+
 });
 
 /******************************************
@@ -158,27 +164,29 @@ VALDIATION RULES
 let validName = () => { // Name cannot be blank
     let value = name.value;
     if (value == null || value == "") {
-        name.className = 'field-error';
-
+        nameError.className = "error-text";
+        nameError.innerHTML = "Please enter a valid name";
+        name.previousElementSibling.append(nameError);
         return false;
     } else {
-        name.removeAttribute('class');
+        hide(nameError);
         return true;
     }
 };
 
 let validEmail = () => { // Email must be valid syntax (name@name.com)
     let value = mail.value;
+    mailError.className = "error-text";
+    mail.previousElementSibling.append(mailError);
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (value == null || value == "") {
-        mail.className = "field-error";
+        mailError.innerHTML = "Please enter a valid email";
         return false;
     } else if (!regex.test(value)) {
-        mailError.className = "error-text";
-        mailError.innerHTML = "Please use example@example.com formatting";
-        mail.previousElementSibling.append(mailError);
+        mailError.innerHTML = "example@example.com";
+        return false;
     } else {
-        mail.removeAttribute('class');
+        hide(mailError);
         return true;
     }
 };
@@ -197,36 +205,54 @@ let validActivities = () => { // At least 1 activity must be selected
 
         return false;
     } else {
+        hide(actError);
         return true;
     }
 };
 
 let validNum = () => { // Credit card number must be between 13 and 16 numerical characters 
-    if (isNaN(ccNum.value) || ccNum == "" || ccNum.value.length > 16 || ccNum.value.length < 13) {
-        ccNum.className = "field-error";
+    numError.className = "error-text";
+    ccNum.previousElementSibling.append(numError);
+    if (isNaN(ccNum.value) || ccNum.value == "") {
+        numError.innerHTML = "Value required";
+        return false;
+    } else if (ccNum.value.length > 16 || ccNum.value.length < 13) {
+        numError.innerHTML = "Should be 13-16 digits";
+        show(numError);
         return false;
     } else {
-        ccNum.removeAttribute('class');
+        hide(numError);
         return true;
     }
 }
 
 let validZip = () => { // Zip code must be exactly 5 numerical characters
-    if (isNaN(zip.value) || zip.value.length !== 5) {
-        zip.className = "field-error";
+    zipError.className = "error-text";
+    zip.previousElementSibling.append(zipError);
+    if (isNaN(zip.value) || zip.value == "") {
+        zipError.innerHTML = "Value required";
+        return false;
+    } else if (zip.value.length !== 5) {
+        zipError.innerHTML = "Should be 5 digits";
         return false;
     } else {
-        zip.removeAttribute('class');
+        hide(zipError);
         return true;
     }
 }
 
 let validCVV = () => { // CVV must be exactly 3 numerical characters
-    if (isNaN(cvv.value) || cvv.value.length !== 3) {
-        cvv.className = "field-error";
+    cvvError.className = "error-text";
+    cvv.previousElementSibling.append(cvvError);
+    if (isNaN(cvv.value) || cvv.value == "") {
+        cvvError.innerHTML = "Value required";
+        return false;
+    } else if (cvv.value.length !== 3) {
+        show(cvvError);
+        cvvError.innerHTML = "Should be 3 digits";
         return false;
     } else {
-        cvv.removeAttribute('class');
+        hide(cvvError)
         return true;
     }
 }
@@ -234,16 +260,23 @@ let validCVV = () => { // CVV must be exactly 3 numerical characters
 /******************************************
 REAL TIME
 ******************************************/
-mail.addEventListener('focus', validName);
-title.addEventListener('focus', validEmail);
-zip.addEventListener('focus', validNum);
-cvv.addEventListener('focus', validZip);
-expMonth.addEventListener('focus', validCVV);
+mail.addEventListener('click', validName);
+title.addEventListener('click', validEmail);
+payment.addEventListener('click', validActivities);
+zip.addEventListener('click', validNum);
+cvv.addEventListener('click', validZip);
+expMonth.addEventListener('click', validCVV);
 /******************************************
 
 ******************************************/
 
 form.addEventListener('submit', (e) => {
+    validName();
+    validEmail();
+    validActivities();
+    validNum();
+    validZip();
+    validCVV();
 
     if (!validName() || !validEmail() || !validActivities() || !validNum() || !validZip() || !validCVV()) {
         e.preventDefault();
