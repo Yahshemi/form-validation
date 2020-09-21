@@ -271,6 +271,7 @@ expMonth.addEventListener('click', validCVV);
 ******************************************/
 
 form.addEventListener('submit', (e) => {
+
     validName();
     validEmail();
     validActivities();
@@ -278,8 +279,12 @@ form.addEventListener('submit', (e) => {
     validZip();
     validCVV();
 
-    if (!validName() || !validEmail() || !validActivities() || !validNum() || !validZip() || !validCVV()) {
+    if ((!validName() || !validEmail() || !validActivities() || !validNum() || !validZip() || !validCVV()) && payment.value == "credit card") {
         e.preventDefault();
+    } else if (!validName() || !validEmail() || !validActivities()) {
+        e.preventDefault;
     }
+
+
 
 });
