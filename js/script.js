@@ -267,13 +267,13 @@ let validCVV = () => { // CVV must be exactly 3 numerical characters
 /******************************************
 REAL TIME
 ******************************************/
+ccNum.addEventListener('keyup', validNum);
+ccNum.addEventListener('keydown', validNum);
+zip.addEventListener('keyup', validZip);
+zip.addEventListener('keydown', validZip);
+cvv.addEventListener('keyup', validCVV);
+cvv.addEventListener('keydown', validCVV);
 
-zip.addEventListener('click', validNum);
-zip.addEventListener('focus', validNum);
-cvv.addEventListener('click', validZip);
-cvv.addEventListener('focus', validZip);
-expMonth.addEventListener('click', validCVV);
-expMonth.addEventListener('focus', validCVV);
 /******************************************
 
 ******************************************/
