@@ -7,6 +7,12 @@
     box-sizing: border-box;
 }
 
+:root {
+    --clr-body: rgba(0, 0, 0, 0.9);
+    --clr-background: rgba(255, 255, 255, 0.9);
+    --clr-border: 2px solid rgb(128, 128, 128);
+}
+
 body,
 input,
 button {
@@ -15,8 +21,8 @@ button {
 
 body {
     font: 1em/1.5;
-    color: rgba(6, 49, 68, 0.9);
-    background: #CDE0FB;
+    color: var(--clr-body);
+    background: var(--clr-background);
 }
 
 header {
@@ -41,7 +47,7 @@ a {
 form {
     padding: .875em 1.875em 1.875em;
     background: #9BBEEF;
-    border: 2px solid rgba(8, 63, 87, 0.6);
+    border: var(--clr-border);
     border-radius: 3px;
 }
 
@@ -90,7 +96,7 @@ input {
     font-weight: 500;
     padding: .8em;
     background: #e9f6fb;
-    border: 2px solid rgb(111, 157, 220);
+    border: var(--clr-border);
     border-radius: 3px;
     outline: none;
 }
