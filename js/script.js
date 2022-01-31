@@ -52,7 +52,7 @@ let show = function() { // iterates through a set of items and sets them to show
 // Page load events
 window.addEventListener("load", e => { // 
     form.reset();
-    name.focus(); // focuses the input on the name field on page load
+    $('#name').focus(); // focuses the input on the name field on page load
     hide(other); // hides the text field for other job roles
 
 });
@@ -287,7 +287,5 @@ form.addEventListener('submit', (e) => {
     if ((!validName() || !validEmail() || !validActivities() || !validNum() || !validZip() || !validCVV())) {
         e.preventDefault();
     }
-
-
 
 });
