@@ -183,6 +183,12 @@ option {
     font-size: 1em;
 }
 
+#logo {
+    height: 35px;
+    width: auto;
+    padding-bottom: 1%;
+}
+
 
 /* ================================= 
   Helper Classes
