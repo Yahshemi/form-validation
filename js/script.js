@@ -1,8 +1,5 @@
 /******************************************
-Student: Cooper Hollmaier
-Project: Techdegree - Unit 3
-Intended Behavior: Interactive Form
-Goal: Exceeds Expecatations
+Interactive Form
 ******************************************/
 
 /******************************************
