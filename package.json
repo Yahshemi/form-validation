@@ -1,0 +1,23 @@
+{
+  "name": "html-form-validation",
+  "version": "1.0.0",
+  "description": "> A JavaScript application modifies an HTML form and provides both real-time and on-submit input validation.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yahshemi/form.git"
+  },
+  "keywords": [],
+  "author": "https://yahshemi.github.io/CSS-My-Site/ <yahshemi@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yahshemi/form/issues"
+  },
+  "homepage": "https://github.com/Yahshemi/form#readme",
+  "devDependencies": {
+    "express": "^4.17.2"
+  }
+}
